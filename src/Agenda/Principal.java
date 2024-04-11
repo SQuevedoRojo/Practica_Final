@@ -8,5 +8,6 @@ public class Principal
         System.out.println("");
         System.out.println("...");
         System.out.println("quiero que me funcione el pull y no se meta en rebasing");
+        System.out.println("Pues no me jodas el repositorio");
     }//main()
 }//class
