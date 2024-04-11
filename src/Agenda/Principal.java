@@ -7,5 +7,6 @@ public class Principal
         System.out.println("Hola");
         System.out.println("");
         System.out.println("...");
+        System.out.println("quiero que me funcione el pull y no se meta en rebasing");
     }//main()
 }//class
