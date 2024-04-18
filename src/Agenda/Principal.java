@@ -3,7 +3,10 @@ package Agenda;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-
+/**
+ * 
+ * @author Asier Sergio
+ */
 public class Principal 
 {
     public static void main(String[] args) 
