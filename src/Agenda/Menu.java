@@ -27,13 +27,10 @@ public class Menu
             System.out.println("\t3.- Menú para Imprimir los Dias de Calendario de un Mes");
             System.out.println("\t4.- Salir");
             opcionPrincipal = comprobarScanner(4);
-            if(opcionPrincipal != 4)
-            {
-                switch (opcionPrincipal) {
-                    case 1:opcionesEventosTareas();break;
-                    case 2:opcionesContactos();break;
-                    case 3:opcionesImprimirDias();break;
-                }
+            switch (opcionPrincipal) {
+                case 1:opcionesEventosTareas();break;
+                case 2:opcionesContactos();break;
+                case 3:opcionesImprimirDias();break;
             }
         }while (opcionPrincipal != 4);
         System.out.println("PROGRAMA TERMINADO");
