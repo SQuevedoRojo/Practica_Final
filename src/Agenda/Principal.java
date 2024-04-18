@@ -9,25 +9,16 @@ import java.awt.event.KeyEvent;
  */
 public class Principal 
 {
-    public static void main(String[] args) 
+    
+    public static void main(String[] args) throws AWTException, InterruptedException 
     {
-        System.out.println("Hola");
-        System.out.println("");
-        System.out.println("...");
-        System.out.println("quiero que me funcione el pull y no se meta en rebasing");
-        System.out.println("Pues no me jodas el repositorio");
-        System.out.println("");
-        System.out.println("ada");
-        System.out.println("me tenia qie cambiar de rama");
+        Principal p = new Principal();
+        p.prueba();
     }//main()
     
-    private void limpiar() throws AWTException, InterruptedException
+    public void prueba() throws AWTException, InterruptedException
     {
-        Robot limpiar = new Robot();
-        limpiar.keyPress(KeyEvent.VK_CONTROL);
-        limpiar.keyPress(KeyEvent.VK_L);
-        limpiar.keyRelease(KeyEvent.VK_CONTROL);
-        limpiar.keyRelease(KeyEvent.VK_L);
-        Thread.sleep(250);
+        Menu menu = new Menu();
+        menu.opcionesPrincipales();
     }
 }//class
