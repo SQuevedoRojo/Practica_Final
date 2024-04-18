@@ -59,7 +59,7 @@ public class Principal
         do{
             try 
             {
-                System.out.print("Introduce el año que desee para crear la agenda -> ");
+                System.out.print("\tIntroduce el año que desee para crear la agenda -> ");
                 opcion = entrada.nextInt();
             } 
             catch (InputMismatchException e)
