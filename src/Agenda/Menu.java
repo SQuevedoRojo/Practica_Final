@@ -38,7 +38,6 @@ public class Menu
     private int comprobarScanner(int opMax)
     {
         int opcion = -1;
-        boolean correcto = true;
         do{
             try 
             {
@@ -83,7 +82,8 @@ public class Menu
         System.out.println("\t11.- Guardar en un fichero de texto todos los eventos de un día");
         System.out.println("\t12.- Salir");
         op = comprobarScanner(12);
-        switch (op) {
+        switch (op) 
+        {
             case 1: break;
             case 2: break;
             case 3: break;
@@ -117,7 +117,8 @@ public class Menu
         System.out.println("\t5.- Guardar Contactos");
         System.out.println("\t6.- Salir");
         op = comprobarScanner(6);
-        switch (op) {
+        switch (op) 
+        {
             case 1: break;
             case 2: break;
             case 3: break;
@@ -125,4 +126,4 @@ public class Menu
             case 5: break;
         }
     }//opcionesContactos()
-}
+}//class
