@@ -33,7 +33,7 @@ public class Menu
                 case 3:opcionesImprimirDias();break;
             }
         }while (opcionPrincipal != 4);
-        System.out.println("PROGRAMA TERMINADO");
+        System.out.println("|PROGRAMA TERMINADO|");
     }//opciones()
     
     private int comprobarScanner(int opMax)
