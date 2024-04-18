@@ -1,24 +1,76 @@
 package Agenda;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 /**
- * 
+ * Clase principal que regula el comportamiento de la estructura de datos del programa
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Principal 
 {
     
+    private static final int MESES = 12;
+    private static final int DIAS = 31;
+    private Dia[][] dias;
+    private Menu menu;
+    private Scanner entrada = new Scanner(System.in);
+    private int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
+    
+    public Principal()
+    {
+        dias = new Dia[MESES][DIAS];
+        menu = new Menu();
+    }
+    
     public static void main(String[] args) throws AWTException, InterruptedException 
     {
         Principal p = new Principal();
-        p.prueba();
+        p.inicio();
     }//main()
     
-    public void prueba() throws AWTException, InterruptedException
+    private void inicio() throws AWTException, InterruptedException
     {
-        Menu menu = new Menu();
         menu.opcionesPrincipales();
-    }
+
+    }//inicio()
+    
+    private int diasDisponibles()
+    {
+        int anno = comprobarScanner();
+        int diasFebrero = 28;
+        if (annoBisiesto(anno))
+            diasFebrero++;
+        return diasFebrero;
+    }//crearAgenda()
+    
+    
+    private boolean annoBisiesto(int anno)
+    {
+        boolean bisiesto = false;
+        LocalDate fecha = LocalDate.of(anno,01,01);
+        return fecha.isLeapYear();
+    }//annoBisiesto()
+    
+    private int comprobarScanner()
+    {
+        int opcion = -1;
+        do{
+            try 
+            {
+                System.out.print("Introduce el año que desee para crear la agenda -> ");
+                opcion = entrada.nextInt();
+            } 
+            catch (InputMismatchException e)
+            {
+                System.out.println("\n\t\tNo has introducido un número entero");
+                entrada.nextLine();
+            }
+        }while(!(opcion > 0));
+        return opcion;
+    }//comprobarScanner()
+    
+    
 }//class
