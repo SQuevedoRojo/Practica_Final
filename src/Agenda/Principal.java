@@ -33,7 +33,7 @@ public class Principal
     
     private void inicio() throws AWTException, InterruptedException
     {
-        menu.opcionesPrincipales();
+        menu.opcionesPrincipales(this);
 
     }//inicio()
     
@@ -45,7 +45,6 @@ public class Principal
             diasFebrero++;
         return diasFebrero;
     }//crearAgenda()
-    
     
     private boolean annoBisiesto(int anno)
     {
@@ -71,6 +70,61 @@ public class Principal
         }while(!(opcion > 0));
         return opcion;
     }//comprobarScanner()
+    
+    public void crearRecordatorio()
+    {
+        
+    }//crearRecordatorio()
+    
+    public void crearTarea()
+    {
+        
+    }//crearTarea()
+    
+    public void borrarRecordatorio()
+    {
+        
+    }//borrarRecordatorio()
+    
+    public void borrarTarea()
+    {
+        
+    }//borrarTarea()
+    
+    public void imprimirEventosDia()
+    {
+        
+    }//imprimirEventosDia()
+    
+    public void imprimirEventosMes()
+    {
+        
+    }//imprimirEventosMes()
+    
+    public void imprimirEventoEspecifico()
+    {
+        
+    }//imprimirEventoEspecifico()
+    
+    public void leerEventosFichero()
+    {
+        
+    }//leerEventosFichero()
+    
+    public void guardarEventosAnno()
+    {
+        
+    }//guardarEventosAnno()
+    
+    public void guardarEventosMes()
+    {
+        
+    }//guardarEventosMes()
+    
+    public void guardarEventosDia()
+    {
+        
+    }//guardarEventosDia()
     
     
 }//class

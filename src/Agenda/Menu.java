@@ -15,7 +15,7 @@ public class Menu
     private Scanner entrada = new Scanner(System.in);
     public Menu() {}
     
-    public void opcionesPrincipales() throws AWTException, InterruptedException
+    public void opcionesPrincipales(Principal p) throws AWTException, InterruptedException
     {
         int opcionPrincipal = -1;
         do {            
@@ -27,9 +27,9 @@ public class Menu
             System.out.println("\t4.- Salir");
             opcionPrincipal = comprobarScanner(4);
             switch (opcionPrincipal) {
-                case 1:opcionesEventosTareas();break;
-                case 2:opcionesContactos();break;
-                case 3:opcionesImprimirDias();break;
+                case 1:opcionesEventosTareas(p);break;
+                case 2:opcionesContactos(p);break;
+                case 3:opcionesImprimirDias(p);break;
             }
         }while (opcionPrincipal != 4);
         System.out.println("|PROGRAMA TERMINADO|");
@@ -65,7 +65,7 @@ public class Menu
         Thread.sleep(250);
     }//limpiar()
     
-    private void opcionesEventosTareas() throws AWTException, InterruptedException
+    private void opcionesEventosTareas(Principal p) throws AWTException, InterruptedException
     {
         int op = -1;
         limpiar();
@@ -84,21 +84,21 @@ public class Menu
         op = comprobarScanner(12);
         switch (op) 
         {
-            case 1: break;
-            case 2: break;
-            case 3: break;
-            case 4: break;
-            case 5: break;
-            case 6: break;
-            case 7: break;
-            case 8: break;
-            case 9: break;
-            case 10: break;
-            case 11: break;
+            case 1: p.crearRecordatorio(); break;
+            case 2: p.crearTarea(); break;
+            case 3: p.borrarRecordatorio(); break;
+            case 4: p.borrarTarea(); break;
+            case 5: p.imprimirEventosDia(); break;
+            case 6: p.imprimirEventosMes(); break;
+            case 7: p.imprimirEventoEspecifico(); break;
+            case 8: p.leerEventosFichero(); break;
+            case 9: p.guardarEventosAnno(); break;
+            case 10: p.guardarEventosMes(); break;
+            case 11: p.guardarEventosDia(); break;
         }
     }//opcionesEventosTareas()
     
-    private void opcionesImprimirDias() throws AWTException, InterruptedException
+    private void opcionesImprimirDias(Principal p) throws AWTException, InterruptedException
     {
         int op = -1;
         limpiar();
@@ -106,7 +106,7 @@ public class Menu
         op = comprobarScanner(1);
     }//opcionesImprimirDias()
     
-    private void opcionesContactos() throws AWTException, InterruptedException
+    private void opcionesContactos(Principal p) throws AWTException, InterruptedException
     {
         int op = -1;
         limpiar();
