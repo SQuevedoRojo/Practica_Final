@@ -55,7 +55,7 @@ public class Menu
         return opcion;
     }//comprobarScanner()
     
-    private void limpiar() throws AWTException, InterruptedException
+    public void limpiar() throws AWTException, InterruptedException
     {
         Robot limpiar = new Robot();
         limpiar.keyPress(KeyEvent.VK_CONTROL);
@@ -84,8 +84,8 @@ public class Menu
         op = comprobarScanner(12);
         switch (op) 
         {
-            case 1: p.crearRecordatorio(); break;
-            case 2: p.crearTarea(); break;
+            case 1: p.crearEventos(1); break;
+            case 2: p.crearEventos(2);break;
             case 3: p.borrarRecordatorio(); break;
             case 4: p.borrarTarea(); break;
             case 5: p.imprimirEventosDia(); break;

@@ -23,6 +23,7 @@ public class Principal
     private Scanner entrada = new Scanner(System.in);
     private int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
     private FileWriter fw = null;
+    private int anno;
     
     public Principal()
     {
@@ -44,7 +45,7 @@ public class Principal
     
     private int diasDisponibles()
     {
-        int anno = comprobarScanner();
+        anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
         int diasFebrero = 28;
         if (annoBisiesto(anno))
             diasFebrero++;
@@ -58,13 +59,13 @@ public class Principal
         return fecha.isLeapYear();
     }//annoBisiesto()
     
-    private int comprobarScanner()
+    private int comprobarScanner(String mensaje)
     {
         int opcion = -1;
         do{
             try 
             {
-                System.out.print("\tIntroduce el año que desee para crear la agenda -> ");
+                System.out.print(mensaje);
                 opcion = entrada.nextInt();
             } 
             catch (InputMismatchException e)
@@ -76,12 +77,43 @@ public class Principal
         return opcion;
     }//comprobarScanner()
     
-    public void crearRecordatorio()
+    public void crearEventos(int op) throws AWTException, InterruptedException
+    {
+        int mes = comprobarScanner("Introduce el mes que quieres crear el evento -> ");
+        int dia;
+        do{
+            dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
+            if (!(dia-1 >= diasUtilizados[mes-1] && dia-1 <= diasUtilizados[mes-1]))
+            {
+                System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
+            }
+        }while(!(dia-1 >= diasUtilizados[mes-1] && dia-1 <= diasUtilizados[mes-1]));
+        LocalDate fecha = LocalDate.of(anno, mes, dia);
+        if(dias[(mes-1)][(dia-1)] != null)
+        {
+            menu.limpiar();
+            if(op == 1)
+                crearRecordatorio(fecha);
+            else
+                crearTarea(fecha);
+        }
+        else
+        {
+            menu.limpiar();
+            dias[(mes-1)][(dia-1)] = new Dia(fecha);
+            if(op == 1)
+                crearRecordatorio(fecha);
+            else
+                crearTarea(fecha);
+        }
+    }//crearEventos()
+    
+    private void crearRecordatorio(LocalDate fecha)
     {
         
     }//crearRecordatorio()
     
-    public void crearTarea()
+    private void crearTarea(LocalDate fecha)
     {
         
     }//crearTarea()
