@@ -68,6 +68,7 @@ public class Menu
     private void opcionesEventosTareas(Principal p) throws AWTException, InterruptedException
     {
         int op = -1;
+        String enter;
         limpiar();
         System.out.println("\n\t1.- Crear un Evento Recordatorio");
         System.out.println("\t2.- Crear un Evento Tarea");
@@ -82,6 +83,7 @@ public class Menu
         System.out.println("\t11.- Guardar en un fichero de texto todos los eventos de un día");
         System.out.println("\t12.- Salir");
         op = comprobarScanner(12);
+        limpiar();
         switch (op) 
         {
             case 1: p.crearEventos(1); break;
@@ -96,6 +98,8 @@ public class Menu
             case 10: p.guardarEventosMes(); break;
             case 11: p.guardarEventosDia(); break;
         }
+        System.out.println("\nPulsa enter para continuar");
+        enter = entrada.nextLine();
     }//opcionesEventosTareas()
     
     private void opcionesImprimirDias(Principal p) throws AWTException, InterruptedException

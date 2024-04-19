@@ -33,10 +33,15 @@ public class Evento {
     public LocalDateTime getFechaHora() {
         return fechaHora;
     }
+
+    public int getId() {
+        return id;
+    }
     
     public void mostrarInformacion()
     {
         System.out.println("\nEVENTO CON FECHA Y HORA -> " + fechaHora);
+        System.out.println("ID -> " + id);
         if(diaEntero)
             System.out.println("ESTA DESTINADO PARA EL DIA ENTERO");
         else

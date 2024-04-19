@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -19,10 +20,10 @@ public class Principal
     
     private static final int MESES = 12;
     private static final int DIAS = 31;
+    private final int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
     private Dia[][] dias;
     private Menu menu;
     private Scanner entrada = new Scanner(System.in);
-    private int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
     private FileWriter fw = null;
     private int anno;
     
@@ -80,7 +81,6 @@ public class Principal
     
     public void crearEventos(int op) throws AWTException, InterruptedException
     {
-        menu.limpiar();
         int mes,dia;
         do{
             mes = comprobarScanner("Introduce el mes que quieres crear el evento -> ");
@@ -88,9 +88,7 @@ public class Principal
         do{
             dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
             if (!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]))
-            {
                 System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
-            }
         }while(!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]));
         LocalDate fecha = LocalDate.of(anno, mes, dia);
         if(dias[(mes-1)][(dia-1)] != null)
@@ -161,8 +159,6 @@ public class Principal
         }while(!(horaEstimada >= 0 && horaEstimada <= 23));
         do{
             minutosEstimados = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30]");
-            if(minutosEstimados != 0 || minutosEstimados != 30)
-                System.out.println("SOLO SE ACEPTAN INTERVALOS DE MEDIA HORA");
         }while(!(minutosEstimados == 0 || minutosEstimados == 30));
         System.out.println("Introduzca el concepto del recordatorio -> ");
         entrada.nextLine();
@@ -177,32 +173,82 @@ public class Principal
     
     public void borrarRecordatorio()
     {
-        
+        int id;
+        boolean encontrado = false;
+        do{
+            id = comprobarScanner("Introduce el ID del recordatorio a borrar -> ");
+        }while(!(id > 0));
+        for (int i = 0; i < MESES && !encontrado; i++)
+            for (int j = 0; j < diasUtilizados[i] && !encontrado; j++)
+                if(dias[i][j] != null)
+                    for (int k = 0; k < dias[i][j].getHoras().length && !encontrado; k++) 
+                        if (dias[i][j].getHoras()[k] != null)
+                            for (int l = 0; l < dias[i][j].getHoras()[k].size() && !encontrado; l++)
+                                if(id == dias[i][j].getHoras()[k].get(k).getId() && dias[i][j].getHoras()[k].get(k) instanceof Tarea)
+                                {
+                                    dias[i][j].getHoras()[k].remove(k);
+                                    encontrado = true;
+                                }
+        if(!encontrado)
+            System.out.println("\nNo se ha eliminado el Recordatorio porque no se ha encontado");
+        else
+            System.out.println("\nSe ha eliminado correctamente el Recordatorio");
     }//borrarRecordatorio()
     
     public void borrarTarea()
     {
-        
+        int id;
+        boolean encontrado = false;
+        do{
+            id = comprobarScanner("Introduce el ID de la tarea a borrar -> ");
+        }while(!(id > 0));
+        for (int i = 0; i < MESES && !encontrado; i++)
+            for (int j = 0; j < diasUtilizados[i] && !encontrado; j++)
+                if(dias[i][j] != null)
+                    for (int k = 0; k < dias[i][j].getHoras().length && !encontrado; k++) 
+                        if (dias[i][j].getHoras()[k] != null)
+                            for (int l = 0; l < dias[i][j].getHoras()[k].size() && !encontrado; l++)
+                                if(id == dias[i][j].getHoras()[k].get(k).getId() && dias[i][j].getHoras()[k].get(k) instanceof Tarea)
+                                {
+                                    dias[i][j].getHoras()[k].remove(k);
+                                    encontrado = true;
+                                }
+        if(!encontrado)
+            System.out.println("\nNo se ha eliminado el Recordatorio porque no se ha encontado");
+        else
+            System.out.println("\nSe ha eliminado correctamente el Recordatorio");
     }//borrarTarea()
     
     public void imprimirEventosDia()
     {
-        
+        int mes,dia;
+        do{
+            mes = comprobarScanner("Introduce el mes que quieres ver los Eventos Creados -> ");
+        }while(!(mes >= 1 && mes <= 12));
+        do{
+            dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
+            if (!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]))
+                System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
+        }while(!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]));
+            if(dias[mes-1][dia-1] != null)
+                for (ArrayList<Evento> hora : dias[mes-1][dia-1].getHoras())
+                    if (hora != null)
+                        for (int k = 0; k < hora.size(); k++)
+                            hora.get(k).mostrarInformacion();
     }//imprimirEventosDia()
     
     public void imprimirEventosMes()
     {
         int mes;
-        String e;
         do{
             mes = comprobarScanner("Introduce el mes que quieres ver los Eventos Creados -> ");
         }while(!(mes >= 1 && mes <= 12));
         for (int i = 0; i < diasUtilizados[mes-1]; i++)
             if(dias[mes-1][i] != null)
-                for (int j = 0; j < dias[mes-1][i].getHoras().length; j++)
-                    if(dias[mes-1][i].getHoras()[j] != null)
-                        for (int k = 0; k < dias[mes-1][i].getHoras()[j].size(); k++)
-                            dias[mes-1][i].getHoras()[j].get(k).mostrarInformacion();
+                for (ArrayList<Evento> hora : dias[mes-1][i].getHoras())
+                    if (hora != null)
+                        for (int k = 0; k < hora.size(); k++)
+                            hora.get(k).mostrarInformacion();
     }//imprimirEventosMes()
     
     public void imprimirEventoEspecifico()
