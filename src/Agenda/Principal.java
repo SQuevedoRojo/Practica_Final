@@ -1,6 +1,10 @@
 package Agenda;
 
 import java.awt.AWTException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,6 +22,7 @@ public class Principal
     private Menu menu;
     private Scanner entrada = new Scanner(System.in);
     private int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
+    private FileWriter fw = null;
     
     public Principal()
     {
@@ -44,7 +49,7 @@ public class Principal
         if (annoBisiesto(anno))
             diasFebrero++;
         return diasFebrero;
-    }//crearAgenda()
+    }//diasDisponibles()
     
     private boolean annoBisiesto(int anno)
     {
@@ -113,7 +118,7 @@ public class Principal
     
     public void guardarEventosAnno()
     {
-        
+
     }//guardarEventosAnno()
     
     public void guardarEventosMes()

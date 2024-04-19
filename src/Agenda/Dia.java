@@ -13,6 +13,10 @@ public class Dia {
     private ArrayList<Evento>[] horas = new ArrayList[48];
     private ArrayList<Evento> eventosDiaEntero= new ArrayList<Evento>();
     private LocalDate fecha;
+
+    public Dia(LocalDate fecha) {
+        this.fecha = fecha;
+    }
     
     public void crearRecordatorio(LocalTime hora,boolean an,String nombre,boolean diaEnt){
         LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
