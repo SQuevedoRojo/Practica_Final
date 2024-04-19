@@ -1,33 +1,130 @@
 package Agenda;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 /**
- * 
+ * Clase principal que regula el comportamiento de la estructura de datos del programa
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Principal 
 {
-    public static void main(String[] args) 
+    
+    private static final int MESES = 12;
+    private static final int DIAS = 31;
+    private Dia[][] dias;
+    private Menu menu;
+    private Scanner entrada = new Scanner(System.in);
+    private int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
+    
+    public Principal()
     {
-        System.out.println("Hola");
-        System.out.println("");
-        System.out.println("...");
-        System.out.println("quiero que me funcione el pull y no se meta en rebasing");
-        System.out.println("Pues no me jodas el repositorio");
-        System.out.println("");
-        System.out.println("ada");
-        System.out.println("me tenia qie cambiar de rama");
+        dias = new Dia[MESES][DIAS];
+        menu = new Menu();
+    }
+    
+    public static void main(String[] args) throws AWTException, InterruptedException 
+    {
+        Principal p = new Principal();
+        p.inicio();
     }//main()
     
-    private void limpiar() throws AWTException, InterruptedException
+    private void inicio() throws AWTException, InterruptedException
     {
-        Robot limpiar = new Robot();
-        limpiar.keyPress(KeyEvent.VK_CONTROL);
-        limpiar.keyPress(KeyEvent.VK_L);
-        limpiar.keyRelease(KeyEvent.VK_CONTROL);
-        limpiar.keyRelease(KeyEvent.VK_L);
-        Thread.sleep(250);
-    }
+        menu.opcionesPrincipales(this);
+
+    }//inicio()
+    
+    private int diasDisponibles()
+    {
+        int anno = comprobarScanner();
+        int diasFebrero = 28;
+        if (annoBisiesto(anno))
+            diasFebrero++;
+        return diasFebrero;
+    }//crearAgenda()
+    
+    private boolean annoBisiesto(int anno)
+    {
+        boolean bisiesto = false;
+        LocalDate fecha = LocalDate.of(anno,01,01);
+        return fecha.isLeapYear();
+    }//annoBisiesto()
+    
+    private int comprobarScanner()
+    {
+        int opcion = -1;
+        do{
+            try 
+            {
+                System.out.print("\tIntroduce el año que desee para crear la agenda -> ");
+                opcion = entrada.nextInt();
+            } 
+            catch (InputMismatchException e)
+            {
+                System.out.println("\n\t\tNo has introducido un número entero");
+                entrada.nextLine();
+            }
+        }while(!(opcion > 0));
+        return opcion;
+    }//comprobarScanner()
+    
+    public void crearRecordatorio()
+    {
+        
+    }//crearRecordatorio()
+    
+    public void crearTarea()
+    {
+        
+    }//crearTarea()
+    
+    public void borrarRecordatorio()
+    {
+        
+    }//borrarRecordatorio()
+    
+    public void borrarTarea()
+    {
+        
+    }//borrarTarea()
+    
+    public void imprimirEventosDia()
+    {
+        
+    }//imprimirEventosDia()
+    
+    public void imprimirEventosMes()
+    {
+        
+    }//imprimirEventosMes()
+    
+    public void imprimirEventoEspecifico()
+    {
+        
+    }//imprimirEventoEspecifico()
+    
+    public void leerEventosFichero()
+    {
+        
+    }//leerEventosFichero()
+    
+    public void guardarEventosAnno()
+    {
+        
+    }//guardarEventosAnno()
+    
+    public void guardarEventosMes()
+    {
+        
+    }//guardarEventosMes()
+    
+    public void guardarEventosDia()
+    {
+        
+    }//guardarEventosDia()
+    
+    
 }//class
