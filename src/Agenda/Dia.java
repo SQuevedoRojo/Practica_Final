@@ -28,7 +28,7 @@ public class Dia {
         horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
     }
     
-    public int calculoPosicion(LocalTime h){
+    private int calculoPosicion(LocalTime h){
         int res;
         res=(h.getHour()*2)+(h.getMinute()!=0?1:0);
         
