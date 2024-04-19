@@ -74,21 +74,24 @@ public class Principal
                 System.out.println("\n\t\tNo has introducido un número entero");
                 entrada.nextLine();
             }
-        }while(!(opcion > 0));
+        }while(!(opcion >= 0));
         return opcion;
     }//comprobarScanner()
     
     public void crearEventos(int op) throws AWTException, InterruptedException
     {
-        int mes = comprobarScanner("Introduce el mes que quieres crear el evento -> ");
-        int dia;
+        menu.limpiar();
+        int mes,dia;
+        do{
+            mes = comprobarScanner("Introduce el mes que quieres crear el evento -> ");
+        }while(!(mes >= 1 && mes <= 12));
         do{
             dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
-            if (!(dia-1 >= diasUtilizados[mes-1] && dia-1 <= diasUtilizados[mes-1]))
+            if (!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]))
             {
                 System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
             }
-        }while(!(dia-1 >= diasUtilizados[mes-1] && dia-1 <= diasUtilizados[mes-1]));
+        }while(!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]));
         LocalDate fecha = LocalDate.of(anno, mes, dia);
         if(dias[(mes-1)][(dia-1)] != null)
         {
@@ -115,14 +118,11 @@ public class Principal
         boolean anno = false,diaentero = false;
         String concepto;
         do{
-            hora = comprobarScanner("Introduce la hora para crear el Recordatorio [0..23]");
+            hora = comprobarScanner("Introduce la hora para crear el Recordatorio [0..23] -> ");
         }while(!(hora >= 0 && hora <= 23));
         do{
-            minutos = comprobarScanner("Introduce los minutos para crear el Recordatorio [0 ò 30]");
-            if(minutos != 0 || minutos != 30)
-                System.out.println("SOLO SE ACEPTAN INTERVALOS DE MEDIA HORA");
+            minutos = comprobarScanner("Introduce los minutos para crear el Recordatorio [0 ò 30] -> ");
         }while(!(minutos == 0 || minutos == 30));
-        LocalTime tiempo = LocalTime.of(hora, minutos);
         do{
             anual = comprobarScanner("Introduce 1 si el Recordatorio es de recursividad anual, sino introduzca 0 -> ");
         }while(!(anual == 1 || anual == 0));
@@ -130,7 +130,9 @@ public class Principal
             diaEntero = comprobarScanner("Introduce 1 si el Recordatorio es para el Dia Entero, sino introduzca 0 -> ");
         }while(!(diaEntero == 1 || diaEntero == 0));
         System.out.println("Introduzca el concepto del recordatorio -> ");
+        entrada.nextLine();
         concepto = entrada.nextLine();
+        LocalTime tiempo = LocalTime.of(hora, minutos);
         anno = anual == 1;
         diaentero = diaEntero == 1;
         dias[mes][dia].crearRecordatorio(tiempo, anno, concepto, diaentero);
@@ -143,14 +145,11 @@ public class Principal
         LocalTime horaEst,horaEvento;
         String concepto;
         do{
-            hora = comprobarScanner("Introduce la hora para crear el Recordatorio [0..23]");
+            hora = comprobarScanner("Introduce la hora para crear la Tarea [0..23 -> ]");
         }while(!(hora >= 0 && hora <= 23));
         do{
-            minutos = comprobarScanner("Introduce los minutos para crear el Recordatorio [0 ò 30]");
-            if(minutos != 0 || minutos != 30)
-                System.out.println("SOLO SE ACEPTAN INTERVALOS DE MEDIA HORA");
+            minutos = comprobarScanner("Introduce los minutos para crear la Tarea [0 ò 30] -> ");
         }while(!(minutos == 0 || minutos == 30));
-        LocalTime tiempo = LocalTime.of(hora, minutos);
         do{
             urgente = comprobarScanner("Introduce 1 si el Recordatorio urgente, sino introduzca 0 -> ");
         }while(!(urgente == 1 || urgente == 0));
@@ -158,15 +157,17 @@ public class Principal
             diaEntero = comprobarScanner("Introduce 1 si el Recordatorio es para el Dia Entero, sino introduzca 0 -> ");
         }while(!(diaEntero == 1 || diaEntero == 0));
         do{
-            horaEstimada = comprobarScanner("Introduce la hora para crear el Recordatorio [0..23]");
+            horaEstimada = comprobarScanner("Introduce las horas que durara el Recordatorio [0..23]");
         }while(!(horaEstimada >= 0 && horaEstimada <= 23));
         do{
-            minutosEstimados = comprobarScanner("Introduce los minutos para crear el Recordatorio [0 ò 30]");
+            minutosEstimados = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30]");
             if(minutosEstimados != 0 || minutosEstimados != 30)
                 System.out.println("SOLO SE ACEPTAN INTERVALOS DE MEDIA HORA");
         }while(!(minutosEstimados == 0 || minutosEstimados == 30));
         System.out.println("Introduzca el concepto del recordatorio -> ");
+        entrada.nextLine();
         concepto = entrada.nextLine();
+        LocalTime tiempo = LocalTime.of(hora, minutos);
         diaentero = diaEntero == 1;
         urg = urgente == 1;
         horaEst = LocalTime.of(horaEstimada, minutosEstimados);
@@ -191,7 +192,17 @@ public class Principal
     
     public void imprimirEventosMes()
     {
-        
+        int mes;
+        String e;
+        do{
+            mes = comprobarScanner("Introduce el mes que quieres ver los Eventos Creados -> ");
+        }while(!(mes >= 1 && mes <= 12));
+        for (int i = 0; i < diasUtilizados[mes-1]; i++)
+            if(dias[mes-1][i] != null)
+                for (int j = 0; j < dias[mes-1][i].getHoras().length; j++)
+                    if(dias[mes-1][i].getHoras()[j] != null)
+                        for (int k = 0; k < dias[mes-1][i].getHoras()[j].size(); k++)
+                            dias[mes-1][i].getHoras()[j].get(k).mostrarInformacion();
     }//imprimirEventosMes()
     
     public void imprimirEventoEspecifico()

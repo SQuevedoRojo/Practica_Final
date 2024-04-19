@@ -10,22 +10,36 @@ import java.util.ArrayList;
  * @author Asier Sergio
  */
 public class Dia {
-    private ArrayList<Evento>[] horas = new ArrayList[48];
-    private ArrayList<Evento> eventosDiaEntero= new ArrayList<Evento>();
+    private ArrayList<Evento>[] horas;
+    private ArrayList<Evento> eventosDiaEntero;
     private LocalDate fecha;
 
     public Dia(LocalDate fecha) {
         this.fecha = fecha;
+        horas = new ArrayList[48];
+        eventosDiaEntero= new ArrayList<Evento>();
     }
     
     public void crearRecordatorio(LocalTime hora,boolean an,String nombre,boolean diaEnt){
         LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
-        horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+        if(horas[calculoPosicion(hora)] == null)
+        {
+            horas[calculoPosicion(hora)] = new ArrayList<>();
+            horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+        }
+        else
+            horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
     }
     
     public void crearTarea(LocalTime hora,boolean urg,String nombre,boolean diaEnt,LocalTime tiempo){
         LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
-        horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+        if(horas[calculoPosicion(hora)] == null)
+        {
+            horas[calculoPosicion(hora)] = new ArrayList<>();
+            horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+        }
+        else
+            horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
     }
     
     private int calculoPosicion(LocalTime h){
@@ -34,5 +48,14 @@ public class Dia {
         
         return res;
     }
+
+    public ArrayList<Evento>[] getHoras() {
+        return horas;
+    }
+
+    public ArrayList<Evento> getEventosDiaEntero() {
+        return eventosDiaEntero;
+    }
+    
     
 }

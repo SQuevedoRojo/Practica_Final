@@ -13,5 +13,15 @@ public class Recordatorio extends Evento{
         super(nombre, diaEntero, fechaHora);
         this.anual = anual;
     }
+
+    public boolean isAnual() {
+        return anual;
+    }
     
+    public void mostrarInformacion()
+    {
+        super.mostrarInformacion();
+        if(anual)
+            System.out.println("RECORDATORIO ANUAL");
+    }
 }
