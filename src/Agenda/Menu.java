@@ -98,6 +98,7 @@ public class Menu
             case 10: p.guardarEventosMes(); break;
             case 11: p.guardarEventosDia(); break;
         }
+        entrada.nextLine();
         System.out.println("\nPulsa enter para continuar");
         enter = entrada.nextLine();
     }//opcionesEventosTareas()
