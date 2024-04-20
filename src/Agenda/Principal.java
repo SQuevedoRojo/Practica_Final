@@ -116,24 +116,32 @@ public class Principal
         boolean anno = false,diaentero = false;
         String concepto;
         do{
-            hora = comprobarScanner("Introduce la hora para crear el Recordatorio [0..23] -> ");
-        }while(!(hora >= 0 && hora <= 23));
-        do{
-            minutos = comprobarScanner("Introduce los minutos para crear el Recordatorio [0 ò 30] -> ");
-        }while(!(minutos == 0 || minutos == 30));
-        do{
-            anual = comprobarScanner("Introduce 1 si el Recordatorio es de recursividad anual, sino introduzca 0 -> ");
-        }while(!(anual == 1 || anual == 0));
-        do{
             diaEntero = comprobarScanner("Introduce 1 si el Recordatorio es para el Dia Entero, sino introduzca 0 -> ");
         }while(!(diaEntero == 1 || diaEntero == 0));
-        System.out.println("Introduzca el concepto del recordatorio -> ");
-        entrada.nextLine();
-        concepto = entrada.nextLine();
-        LocalTime tiempo = LocalTime.of(hora, minutos);
-        anno = anual == 1;
         diaentero = diaEntero == 1;
-        dias[mes][dia].crearRecordatorio(tiempo, anno, concepto, diaentero);
+        if(!diaentero)
+        {
+            do{
+                hora = comprobarScanner("Introduce la hora para crear el Recordatorio [0..23] -> ");
+            }while(!(hora >= 0 && hora <= 23));
+            do{
+                minutos = comprobarScanner("Introduce los minutos para crear el Recordatorio [0 ò 30] -> ");
+            }while(!(minutos == 0 || minutos == 30));
+            do{
+                anual = comprobarScanner("Introduce 1 si el Recordatorio es de recursividad anual, sino introduzca 0 -> ");
+            }while(!(anual == 1 || anual == 0));
+            System.out.println("Introduzca el concepto del recordatorio -> ");
+            entrada.nextLine();
+            concepto = entrada.nextLine();
+            LocalTime tiempo = LocalTime.of(hora, minutos);
+            anno = anual == 1;
+            dias[mes][dia].crearRecordatorio(tiempo, anno, concepto, diaentero);
+        }
+        else
+        {
+            
+        }
+        
     }//crearRecordatorio()
     
     private void crearTarea(int mes,int dia)
@@ -143,31 +151,39 @@ public class Principal
         LocalTime horaEst,horaEvento;
         String concepto;
         do{
-            hora = comprobarScanner("Introduce la hora para crear la Tarea [0..23] -> ");
-        }while(!(hora >= 0 && hora <= 23));
-        do{
-            minutos = comprobarScanner("Introduce los minutos para crear la Tarea [0 ò 30] -> ");
-        }while(!(minutos == 0 || minutos == 30));
-        do{
-            urgente = comprobarScanner("Introduce 1 si el Recordatorio urgente, sino introduzca 0 -> ");
-        }while(!(urgente == 1 || urgente == 0));
-        do{
             diaEntero = comprobarScanner("Introduce 1 si el Recordatorio es para el Dia Entero, sino introduzca 0 -> ");
         }while(!(diaEntero == 1 || diaEntero == 0));
-        do{
-            horaEstimada = comprobarScanner("Introduce las horas que durara el Recordatorio [0..23] -> ");
-        }while(!(horaEstimada >= 0 && horaEstimada <= 23));
-        do{
-            minutosEstimados = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30] -> ");
-        }while(!(minutosEstimados == 0 || minutosEstimados == 30));
-        System.out.println("Introduzca el concepto del recordatorio -> ");
-        entrada.nextLine();
-        concepto = entrada.nextLine();
         diaentero = diaEntero == 1;
-        urg = urgente == 1;
-        horaEst = LocalTime.of(horaEstimada, minutosEstimados);
-        horaEvento = LocalTime.of(hora, minutos);
-        dias[mes][dia].crearTarea(horaEvento,urg,concepto, diaentero,horaEst);
+        if(!diaentero)
+        {
+            do{
+                hora = comprobarScanner("Introduce la hora para crear la Tarea [0..23] -> ");
+            }while(!(hora >= 0 && hora <= 23));
+            do{
+                minutos = comprobarScanner("Introduce los minutos para crear la Tarea [0 ò 30] -> ");
+            }while(!(minutos == 0 || minutos == 30));
+            do{
+                urgente = comprobarScanner("Introduce 1 si el Recordatorio urgente, sino introduzca 0 -> ");
+            }while(!(urgente == 1 || urgente == 0));
+
+            do{
+                horaEstimada = comprobarScanner("Introduce las horas que durara el Recordatorio [0..23] -> ");
+            }while(!(horaEstimada >= 0 && horaEstimada <= 23));
+            do{
+                minutosEstimados = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30] -> ");
+            }while(!(minutosEstimados == 0 || minutosEstimados == 30));
+            System.out.println("Introduzca el concepto del recordatorio -> ");
+            entrada.nextLine();
+            concepto = entrada.nextLine();
+            urg = urgente == 1;
+            horaEst = LocalTime.of(horaEstimada, minutosEstimados);
+            horaEvento = LocalTime.of(hora, minutos);
+            dias[mes][dia].crearTarea(horaEvento,urg,concepto, diaentero,horaEst);
+        }
+        else
+        {
+            
+        }
     }//crearTarea()
     
     public void borrarRecordatorio()
