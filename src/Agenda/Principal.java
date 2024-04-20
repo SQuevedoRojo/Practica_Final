@@ -266,6 +266,17 @@ public class Principal
                             hora.get(k).mostrarInformacion();
     }//imprimirEventosMes()
     
+    public void imprimirTodosLosEventos()
+    {
+        for (int i = 0; i < MESES; i++)
+            for (int j = 0; j < diasUtilizados[i]; j++)
+                if(dias[i][j] != null)
+                    for (int k = 0; k < dias[i][j].getHoras().length; k++) 
+                        if (dias[i][j].getHoras()[k] != null)
+                            for (int l = 0; l < dias[i][j].getHoras()[k].size(); l++)
+                                dias[i][j].getHoras()[k].get(l).mostrarInformacion();
+    }//imprimirTodosLosEventos()
+    
     public void imprimirEventoEspecifico()
     {
         int mes,dia,hora,minutos,pos;

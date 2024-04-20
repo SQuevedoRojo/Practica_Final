@@ -76,13 +76,14 @@ public class Menu
         System.out.println("\t4.- Borrar un Evento Tarea");
         System.out.println("\t5.- Imprimir todos los eventos de un día determinado");
         System.out.println("\t6.- Imprimir todos los eventos de un mes determinado");
-        System.out.println("\t7.- Imprimir un evento por mes, día y hora");
-        System.out.println("\t8.- Leer de un fichero todos los eventos de un año");
-        System.out.println("\t9.- Guardar de un fichero de texto todos los eventos de un año");
-        System.out.println("\t10.- Guardar en un fichero de texto todos los eventos de un mes");
-        System.out.println("\t11.- Guardar en un fichero de texto todos los eventos de un día");
-        System.out.println("\t12.- Salir");
-        op = comprobarScanner(12);
+        System.out.println("\t7.- Imprimir todos los eventos de la agenda");
+        System.out.println("\t8.- Imprimir un evento por mes, día y hora");
+        System.out.println("\t9.- Leer de un fichero todos los eventos de un año");
+        System.out.println("\t10.- Guardar de un fichero de texto todos los eventos de un año");
+        System.out.println("\t11.- Guardar en un fichero de texto todos los eventos de un mes");
+        System.out.println("\t12.- Guardar en un fichero de texto todos los eventos de un día");
+        System.out.println("\t13.- Salir");
+        op = comprobarScanner(13);
         limpiar();
         switch (op) 
         {
@@ -92,11 +93,12 @@ public class Menu
             case 4: p.borrarTarea(); break;
             case 5: p.imprimirEventosDia(); break;
             case 6: p.imprimirEventosMes(); break;
-            case 7: p.imprimirEventoEspecifico(); break;
-            case 8: p.leerEventosFichero(); break;
-            case 9: p.guardarEventosAnno(); break;
-            case 10: p.guardarEventosMes(); break;
-            case 11: p.guardarEventosDia(); break;
+            case 7: p.imprimirTodosLosEventos(); break;
+            case 8: p.imprimirEventoEspecifico(); break;
+            case 9: p.leerEventosFichero(); break;
+            case 10: p.guardarEventosAnno(); break;
+            case 11: p.guardarEventosMes(); break;
+            case 12: p.guardarEventosDia(); break;
         }
         entrada.nextLine();
         System.out.println("\nPulsa enter para continuar");
