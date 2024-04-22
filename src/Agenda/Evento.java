@@ -9,7 +9,7 @@ import java.time.LocalTime;
  */
 public class Evento {
     private int id;
-    private int sigId=1;
+    private static int sigId=1;
     private String nombre;
     private boolean diaEntero;
     private LocalDateTime fechaHora;
