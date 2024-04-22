@@ -220,14 +220,7 @@ public class Principal
         for (int i = 0; i < MESES && !encontrado; i++)
             for (int j = 0; j < diasUtilizados[i] && !encontrado; j++)
                 if(dias[i][j] != null)
-                    for (int k = 0; k < dias[i][j].getHoras().length && !encontrado; k++) 
-                        if (dias[i][j].getHoras()[k] != null)
-                            for (int l = 0; l < dias[i][j].getHoras()[k].size() && !encontrado; l++)
-                                if(id == dias[i][j].getHoras()[k].get(k).getId() && dias[i][j].getHoras()[k].get(k) instanceof Tarea)
-                                {
-                                    dias[i][j].getHoras()[k].remove(k);
-                                    encontrado = true;
-                                }
+                    encontrado = dias[i][j].eliminarRecordatorio(id);
         if(!encontrado)
             System.out.println("\nNo se ha eliminado el Recordatorio porque no se ha encontado");
         else
@@ -244,14 +237,7 @@ public class Principal
         for (int i = 0; i < MESES && !encontrado; i++)
             for (int j = 0; j < diasUtilizados[i] && !encontrado; j++)
                 if(dias[i][j] != null)
-                    for (int k = 0; k < dias[i][j].getHoras().length && !encontrado; k++) 
-                        if (dias[i][j].getHoras()[k] != null)
-                            for (int l = 0; l < dias[i][j].getHoras()[k].size() && !encontrado; l++)
-                                if(id == dias[i][j].getHoras()[k].get(k).getId() && dias[i][j].getHoras()[k].get(k) instanceof Tarea)
-                                {
-                                    dias[i][j].getHoras()[k].remove(k);
-                                    encontrado = true;
-                                }
+                    encontrado = dias[i][j].eliminarTarea(id);
         if(!encontrado)
             System.out.println("\nNo se ha eliminado el Recordatorio porque no se ha encontado");
         else
