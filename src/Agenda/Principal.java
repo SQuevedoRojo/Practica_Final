@@ -246,10 +246,7 @@ public class Principal
                 System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
         }while(!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]));
             if(dias[mes-1][dia-1] != null)
-                for (ArrayList<Evento> hora : dias[mes-1][dia-1].getHoras())
-                    if (hora != null)
-                        for (int k = 0; k < hora.size(); k++)
-                            hora.get(k).mostrarInformacion();
+                dias[mes-1][dia-1].tratarInfo();
     }//imprimirEventosDia()
     
     public void imprimirEventosMes()
@@ -260,10 +257,7 @@ public class Principal
         }while(!(mes >= 1 && mes <= 12));
         for (int i = 0; i < diasUtilizados[mes-1]; i++)
             if(dias[mes-1][i] != null)
-                for (ArrayList<Evento> hora : dias[mes-1][i].getHoras())
-                    if (hora != null)
-                        for (int k = 0; k < hora.size(); k++)
-                            hora.get(k).mostrarInformacion();
+                dias[mes-1][i].tratarInfo();
     }//imprimirEventosMes()
     
     public void imprimirTodosLosEventos()
@@ -271,10 +265,7 @@ public class Principal
         for (int i = 0; i < MESES; i++)
             for (int j = 0; j < diasUtilizados[i]; j++)
                 if(dias[i][j] != null)
-                    for (int k = 0; k < dias[i][j].getHoras().length; k++) 
-                        if (dias[i][j].getHoras()[k] != null)
-                            for (int l = 0; l < dias[i][j].getHoras()[k].size(); l++)
-                                dias[i][j].getHoras()[k].get(l).mostrarInformacion();
+                    dias[i][j].tratarInfo();
     }//imprimirTodosLosEventos()
     
     public void imprimirEventoEspecifico()
@@ -295,11 +286,8 @@ public class Principal
             minutos = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30]");
         }while(!(minutos == 0 || minutos == 30));
         LocalTime tiempo = LocalTime.of(hora, minutos);
-        pos = Dia.calculoPosicionHora(tiempo);
         if(dias[mes-1][dia-1] != null)
-            if (dias[mes-1][dia-1].getHoras()[pos] != null)
-                for (int i = 0; i < dias[mes-1][dia-1].getHoras()[pos].size(); i++)
-                    dias[mes-1][dia-1].getHoras()[pos].get(i).mostrarInformacion();
+            dias[mes-1][dia-1].tratarInfoEspecifico(tiempo);
     }//imprimirEventoEspecifico()
     
     public void leerEventosFichero()
