@@ -87,9 +87,9 @@ public class Principal
         }while(!(mes >= 1 && mes <= 12));
         do{
             dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
-            if (!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]))
+            if (!(dia >= 1 && dia <= diasUtilizados[mes-1]))
                 System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
-        }while(!(dia-1 >= 1 && dia-1 <= diasUtilizados[mes-1]));
+        }while(!(dia >= 1 && dia <= diasUtilizados[mes-1]));
         LocalDate fecha = LocalDate.of(anno, mes, dia);
         if(dias[(mes-1)][(dia-1)] != null)
         {
@@ -139,7 +139,15 @@ public class Principal
         }
         else
         {
-            
+            do{
+                anual = comprobarScanner("Introduce 1 si el Recordatorio es de recursividad anual, sino introduzca 0 -> ");
+            }while(!(anual == 1 || anual == 0));
+            System.out.println("Introduzca el concepto del recordatorio -> ");
+            entrada.nextLine();
+            concepto = entrada.nextLine();
+            anno = anual == 1;
+            LocalTime l = null;
+            dias[mes][dia].crearRecordatorio(l, anno, concepto, diaentero);
         }
         
     }//crearRecordatorio()
@@ -182,7 +190,23 @@ public class Principal
         }
         else
         {
-            
+            do{
+                urgente = comprobarScanner("Introduce 1 si el Recordatorio urgente, sino introduzca 0 -> ");
+            }while(!(urgente == 1 || urgente == 0));
+
+            do{
+                horaEstimada = comprobarScanner("Introduce las horas que durara el Recordatorio [0..23] -> ");
+            }while(!(horaEstimada >= 0 && horaEstimada <= 23));
+            do{
+                minutosEstimados = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30] -> ");
+            }while(!(minutosEstimados == 0 || minutosEstimados == 30));
+            System.out.println("Introduzca el concepto del recordatorio -> ");
+            entrada.nextLine();
+            concepto = entrada.nextLine();
+            urg = urgente == 1;
+            horaEst = LocalTime.of(horaEstimada, minutosEstimados);
+            LocalTime l = null;
+            dias[mes][dia].crearTarea(l,urg,concepto, diaentero,horaEst);
         }
     }//crearTarea()
     

@@ -21,10 +21,12 @@ public class Dia {
     }
     
     public void crearRecordatorio(LocalTime hora,boolean an,String nombre,boolean diaEnt){
-        LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
+        
         if (diaEnt)
             eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt));
         else
+        {
+            LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
             if(horas[calculoPosicion(hora)] == null)
             {
                 horas[calculoPosicion(hora)] = new ArrayList<>();
@@ -32,13 +34,16 @@ public class Dia {
             }
             else
                 horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+        }
     }
     
     public void crearTarea(LocalTime hora,boolean urg,String nombre,boolean diaEnt,LocalTime tiempo){
-        LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
+        
         if (diaEnt)
             eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt));
         else
+        {
+            LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
             if(horas[calculoPosicion(hora)] == null)
             {
                 horas[calculoPosicion(hora)] = new ArrayList<>();
@@ -46,6 +51,7 @@ public class Dia {
             }
             else
                 horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+        }
     }
     
     public int calculoPosicion(LocalTime h){
@@ -67,9 +73,7 @@ public class Dia {
                 }
         }
         for (int i = 0; i < eventosDiaEntero.size(); i++) {
-            if (eventosDiaEntero.get(i)!=null) {
                 eventosDiaEntero.get(i).mostrarInformacion();
-            }
         }
     }
     
