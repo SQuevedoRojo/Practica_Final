@@ -22,36 +22,30 @@ public class Dia {
     
     public void crearRecordatorio(LocalTime hora,boolean an,String nombre,boolean diaEnt){
         LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
-        if(horas[calculoPosicion(hora)] == null)
-        {
-            horas[calculoPosicion(hora)] = new ArrayList<>();
-            if (diaEnt) 
-                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt));
-            else
-                horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
-        }
+        if (diaEnt)
+            eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt));
         else
-            if (diaEnt) 
-                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt));
+            if(horas[calculoPosicion(hora)] == null)
+            {
+                horas[calculoPosicion(hora)] = new ArrayList<>();
+                horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+            }
             else
                 horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
     }
     
     public void crearTarea(LocalTime hora,boolean urg,String nombre,boolean diaEnt,LocalTime tiempo){
         LocalDateTime fechaHora =LocalDateTime.of(fecha,hora);
-        if(horas[calculoPosicion(hora)] == null)
-        {
-            horas[calculoPosicion(hora)] = new ArrayList<>();
-            if(diaEnt)
+        if (diaEnt)
             eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt));
-            else
-            horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
-        }
         else
-            if(diaEnt)
-            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt));
+            if(horas[calculoPosicion(hora)] == null)
+            {
+                horas[calculoPosicion(hora)] = new ArrayList<>();
+                horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+            }
             else
-            horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+                horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
     }
     
     public int calculoPosicion(LocalTime h){
