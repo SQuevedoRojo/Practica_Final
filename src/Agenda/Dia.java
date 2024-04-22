@@ -25,10 +25,16 @@ public class Dia {
         if(horas[calculoPosicion(hora)] == null)
         {
             horas[calculoPosicion(hora)] = new ArrayList<>();
-            horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+            if (diaEnt) 
+                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+            else
+                horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
         }
         else
-            horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+            if (diaEnt) 
+                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+            else
+                horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
     }
     
     public void crearTarea(LocalTime hora,boolean urg,String nombre,boolean diaEnt,LocalTime tiempo){
@@ -36,9 +42,15 @@ public class Dia {
         if(horas[calculoPosicion(hora)] == null)
         {
             horas[calculoPosicion(hora)] = new ArrayList<>();
+            if(diaEnt)
+            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+            else
             horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
         }
         else
+            if(diaEnt)
+            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+            else
             horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
     }
     
@@ -48,12 +60,31 @@ public class Dia {
         
         return res;
     }
-
-    public static int calculoPosicionHora(LocalTime h){
-        int res;
-        res=(h.getHour()*2)+(h.getMinute()!=0?1:0);
+    
+    public void eliminarEvento(){
         
-        return res;
+    }
+    
+    public void tratarInfo(){
+        for (int i = 0; i < horas.length; i++) {
+            if (horas[i]!=null)
+                for (int j = 0; j < horas[i].size(); j++) {
+                    horas[i].get(j).mostrarInformacion();
+                }
+        }
+        for (int i = 0; i < eventosDiaEntero.size(); i++) {
+            if (eventosDiaEntero.get(i)!=null) {
+                eventosDiaEntero.get(i).mostrarInformacion();
+            }
+        }
+    }
+    
+    public void tratarInfoEspecifico(LocalTime pos){
+        int posicion=calculoPosicion(pos);
+            if (horas[posicion]!=null)
+                for (int j = 0; j < horas[posicion].size(); j++) {
+                    horas[posicion].get(j).mostrarInformacion();
+                }
     }
     
     public ArrayList<Evento>[] getHoras() {
