@@ -17,6 +17,12 @@ public class Tarea extends Evento{
         this.tiempoEstimado = tiempoEstimado;
     }
 
+    public Tarea(boolean urgente, LocalTime tiempoEstimado, String nombre, boolean diaEntero) {
+        super(nombre, diaEntero);
+        this.urgente = urgente;
+        this.tiempoEstimado = tiempoEstimado;
+    }
+
     public boolean isUrgente() {
         return urgente;
     }

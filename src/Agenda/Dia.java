@@ -26,13 +26,13 @@ public class Dia {
         {
             horas[calculoPosicion(hora)] = new ArrayList<>();
             if (diaEnt) 
-                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt));
             else
                 horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
         }
         else
             if (diaEnt) 
-                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt,fechaHora));
+                eventosDiaEntero.add(new Recordatorio(an, nombre, diaEnt));
             else
                 horas[calculoPosicion(hora)].add(new Recordatorio(an, nombre, diaEnt,fechaHora));
     }
@@ -43,13 +43,13 @@ public class Dia {
         {
             horas[calculoPosicion(hora)] = new ArrayList<>();
             if(diaEnt)
-            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt));
             else
             horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
         }
         else
             if(diaEnt)
-            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
+            eventosDiaEntero.add(new Tarea(urg, tiempo, nombre, diaEnt));
             else
             horas[calculoPosicion(hora)].add(new Tarea(urg, tiempo, nombre, diaEnt, fechaHora));
     }

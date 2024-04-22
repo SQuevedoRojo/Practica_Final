@@ -14,6 +14,12 @@ public class Recordatorio extends Evento{
         this.anual = anual;
     }
 
+    public Recordatorio(boolean anual, String nombre, boolean diaEntero) {
+        super(nombre, diaEntero);
+        this.anual = anual;
+    }
+    
+
     public boolean isAnual() {
         return anual;
     }

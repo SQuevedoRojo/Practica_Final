@@ -22,6 +22,14 @@ public class Evento {
         this.sigId++;
     }
 
+    public Evento(String nombre, boolean diaEntero) {
+        this.nombre = nombre;
+        this.diaEntero = diaEntero;
+        this.id=sigId;
+        this.sigId++;
+    }
+    
+
     public String getNombre() {
         return nombre;
     }
