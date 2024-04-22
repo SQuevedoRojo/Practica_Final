@@ -61,8 +61,48 @@ public class Dia {
         return res;
     }
     
-    public void eliminarEvento(){
+    public boolean eliminarRecordatorio(int id){
+        boolean ok=false;
         
+        for (int i = 0; i < horas.length && !ok; i++) {
+            if (horas[i]!=null) 
+                for (int j = 0; j < horas[i].size(); j++) {
+                    if(id == horas[i].get(j).getId() && horas[i].get(j) instanceof Recordatorio){
+                        horas[i].remove(j);
+                        ok = true;   
+                    }
+                }
+        }
+        for (int i = 0; i < eventosDiaEntero.size(); i++) {
+            if(id == eventosDiaEntero.get(i).getId() && eventosDiaEntero.get(i) instanceof Recordatorio){
+                        eventosDiaEntero.remove(i);
+                        ok = true;   
+                    }
+        }
+        
+        return ok;
+    }
+    
+    public boolean eliminarTarea(int id){
+        boolean ok=false;
+        
+        for (int i = 0; i < horas.length && !ok; i++) {
+            if (horas[i]!=null) 
+                for (int j = 0; j < horas[i].size(); j++) {
+                    if(id == horas[i].get(j).getId() && horas[i].get(j) instanceof Tarea){
+                        horas[i].remove(j);
+                        ok = true;   
+                    }
+                }
+        }
+        for (int i = 0; i < eventosDiaEntero.size(); i++) {
+            if(id == eventosDiaEntero.get(i).getId() && eventosDiaEntero.get(i) instanceof Tarea){
+                        eventosDiaEntero.remove(i);
+                        ok = true;   
+                    }
+        }
+        
+        return ok;
     }
     
     public void tratarInfo(){
