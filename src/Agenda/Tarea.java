@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
- * 
+ * Clase Tarea
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Tarea extends Evento{
     private boolean urgente;

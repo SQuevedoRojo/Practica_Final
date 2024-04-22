@@ -7,8 +7,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * 
+ * Clase que se encarga del menu
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Menu 
 {

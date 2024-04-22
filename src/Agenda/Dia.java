@@ -6,8 +6,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
- * 
+ * Clase dia que se encarga de guardar las tareas de los eventos
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Dia {
     private ArrayList<Evento>[] horas;

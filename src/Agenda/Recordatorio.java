@@ -3,8 +3,9 @@ package Agenda;
 import java.time.LocalDateTime;
 
 /**
- * 
+ * Clase Recordatorio
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Recordatorio extends Evento{
     private boolean anual;

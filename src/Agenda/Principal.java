@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
- * Clase principal que regula el comportamiento de la estructura de datos del programa
+ * Clase principal que regula el comportamiento de la estructura de datos del programa 
  * @author Asier Sergio
  * @version 1.0
  */
+
 public class Principal 
 {
     

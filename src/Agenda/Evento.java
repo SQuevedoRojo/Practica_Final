@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
- * 
+ * Clase Padre de Tarea y Recordatorio
  * @author Asier Sergio
+ * @version 1.0
  */
 public class Evento {
     private int id;
