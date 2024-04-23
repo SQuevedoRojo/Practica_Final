@@ -28,9 +28,9 @@ public class Menu
             System.out.println("\t4.- Salir");
             opcionPrincipal = comprobarScanner(4);
             switch (opcionPrincipal) {
-                case 1:opcionesEventosTareas(p);break;
-                case 2:opcionesContactos(p);break;
-                case 3:opcionesImprimirDias(p);break;
+                case 1:opcionesEventosTareas(p);continuar();break;
+                case 2:opcionesContactos(p);continuar();break;
+                case 3:opcionesImprimirDias(p);continuar();break;
             }
         }while (opcionPrincipal != 4);
         System.out.println("|PROGRAMA TERMINADO|");
@@ -56,6 +56,14 @@ public class Menu
         return opcion;
     }//comprobarScanner()
     
+    private void continuar()
+    {
+        String enter;
+        System.out.println("\nPulsa enter para continuar");
+        entrada.nextLine();
+        enter = entrada.nextLine();
+    }
+    
     public void limpiar() throws AWTException, InterruptedException
     {
         Robot limpiar = new Robot();
@@ -69,7 +77,6 @@ public class Menu
     private void opcionesEventosTareas(Principal p) throws AWTException, InterruptedException
     {
         int op = -1;
-        String enter;
         limpiar();
         System.out.println("\n\t1.- Crear un Evento Recordatorio");
         System.out.println("\t2.- Crear un Evento Tarea");
@@ -101,17 +108,14 @@ public class Menu
             case 11: p.guardarEventosMes(); break;
             case 12: p.guardarEventosDia(); break;
         }
-        entrada.nextLine();
-        System.out.println("\nPulsa enter para continuar");
-        enter = entrada.nextLine();
+        
     }//opcionesEventosTareas()
     
     private void opcionesImprimirDias(Principal p) throws AWTException, InterruptedException
     {
         int op = -1;
         limpiar();
-        System.out.println("\n\tIntroduce el Mes del que Quieres Imprimir los Dias del Calendario");
-        op = comprobarScanner(1);
+        p.imprimirMesCalendario();
     }//opcionesImprimirDias()
     
     private void opcionesContactos(Principal p) throws AWTException, InterruptedException

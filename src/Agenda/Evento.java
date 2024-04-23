@@ -49,12 +49,18 @@ public class Evento {
     
     public void mostrarInformacion()
     {
-        System.out.println("\nEVENTO CON FECHA Y HORA -> " + fechaHora);
-        System.out.println("ID -> " + id);
+        
         if(diaEntero)
+        {
+            System.out.println("ID -> " + id);
             System.out.println("ESTA DESTINADO PARA EL DIA ENTERO");
+        }
         else
+        {
+            System.out.println("\nEVENTO CON FECHA Y HORA -> " + fechaHora);
+            System.out.println("ID -> " + id);
             System.out.println("NO ESTA DESTINADO PARA EL DIA ENTERO");
+        }
         System.out.println("EL CONCEPTO ES : \n\t" + nombre);
     }
 }

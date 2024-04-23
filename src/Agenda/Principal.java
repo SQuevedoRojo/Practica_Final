@@ -321,5 +321,13 @@ public class Principal
         
     }//guardarEventosDia()
     
+    public void imprimirMesCalendario()
+    {
+        int mes;
+        do{
+            mes = comprobarScanner("Introduce el mes del que quieres imprimir el calendario -> ");
+        }while(!(mes >= 1 && mes <= 12));
+        Calendario.calendarioPorMes(mes, anno);;
+    }
     
 }//class
