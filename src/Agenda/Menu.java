@@ -113,7 +113,6 @@ public class Menu
     
     private void opcionesImprimirDias(Principal p) throws AWTException, InterruptedException
     {
-        int op = -1;
         limpiar();
         p.imprimirMesCalendario();
     }//opcionesImprimirDias()

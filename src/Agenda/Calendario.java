@@ -3,60 +3,69 @@ package Agenda;
 import java.util.GregorianCalendar;
 
 
-public class Calendario
+public class Calendario implements Constantes_Colores
 {
-    private static final int DOMINGO=1;
-    private static final int LUNES=2;
-    private static final int MARTES=3;
-    private static final int MIERCOLES=4;
-    private static final int JUEVES=5;
-    private static final int VIERNES=6;
-    private static final int SABADO=7;
-
-    public static void calendarioPorMes(int mes,int anno)
+    public static void calendarioPorMes(int mes, int anno) 
     {
-        int contador1 = 0,contador2 = 0;
-        int primerdia=1;
+        int primerDia = 1;
 
-        GregorianCalendar fecha=new GregorianCalendar(anno,mes-1,primerdia);
-        GregorianCalendar fecha2=new GregorianCalendar(anno,mes,primerdia);
-        primerdia=fecha.get(fecha.DAY_OF_WEEK);
+        GregorianCalendar fecha = new GregorianCalendar(anno, mes - 1, primerDia);
+        GregorianCalendar fecha2 = new GregorianCalendar(anno, mes, primerDia);
+        primerDia = fecha.get(GregorianCalendar.DAY_OF_WEEK);
 
-        System.out.println("L"+"  "+"   M"+"  "+"  X"+"  "+"  J"+"  "+"  V"+"  "+"  S"+"  "+"  D"+"  ");
-        switch (primerdia){
-            
-            case DOMINGO:System.out.print(" ");break;
-            case LUNES:break;
-            case MARTES:System.out.print(" ");break;
-            case MIERCOLES:System.out.print(" ");break;
-            case JUEVES:System.out.print(" ");break;
-            case VIERNES:System.out.print(" ");break;
-            case SABADO:System.out.print(" ");
+        System.out.println(Constantes_Colores.ANSI_BLUE_BACKGROUND+"L  M  X   J  V  S  D"+Constantes_Colores.ANSI_RESET);
+        switch (primerDia) {
+            case 1:
+                System.out.print("                  ");
+                break;
+            case 2:
+                break;
+            case 3:
+                System.out.print("   ");
+                break;
+            case 4:
+                System.out.print("      ");
+                break;
+            case 5:
+                System.out.print("         ");
+                break;
+            case 6:
+                System.out.print("            ");
+                break;
+            case 7:
+                System.out.print("               ");
+                break;
         }
-        while(fecha.equals(fecha2)==false){
-            if(fecha.DATE < 10)
-                if(contador2 == 0 && contador1 != 0)
-                    System.out.print(fecha.get(fecha.DATE)+"    ");
-                else
-                     System.out.print(fecha.get(fecha.DATE)+"   ");
-            else
-                System.out.print(fecha.get(fecha.DATE)+" ");
-            
-            if(fecha.get(GregorianCalendar.DAY_OF_WEEK)==GregorianCalendar.SUNDAY)
-            {
+
+        while (!fecha.equals(fecha2)) {
+            int dia = fecha.get(GregorianCalendar.DAY_OF_MONTH);
+            saberDia(dia, fecha);
+            if (fecha.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY) 
                 System.out.println("");
-                contador2++;
-            }
-            fecha.add(GregorianCalendar.DATE,1);
-            if(fecha.get(GregorianCalendar.DAY_OF_WEEK)== 3)
-            {
-                if (contador1 == 0)
-                    System.out.print("  ");
-                if(contador1  == 1)
-                    System.out.print("  ");
-                contador1++;
-            }
+            fecha.add(GregorianCalendar.DATE, 1);
+            if (fecha.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.TUESDAY)
+                System.out.print(" ");
         }
         System.out.println("");
+    }
+    
+    private static void saberDia(int dia,GregorianCalendar fecha)
+    {
+        if(dia < 10)
+        {
+            if(fecha.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY || 
+                    fecha.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SATURDAY)
+                System.out.print(" " + Constantes_Colores.ANSI_RED + dia + Constantes_Colores.ANSI_RESET + " ");
+            else
+                System.out.print(" " + Constantes_Colores.ANSI_GREEN + dia + Constantes_Colores.ANSI_RESET + " ");
+        }
+        else
+        {
+            if(fecha.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY || 
+                    fecha.get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SATURDAY)
+                System.out.print(Constantes_Colores.ANSI_RED + dia + Constantes_Colores.ANSI_RESET + " ");
+            else
+                System.out.print(Constantes_Colores.ANSI_GREEN + dia + Constantes_Colores.ANSI_RESET + " ");
+        }
     }
 }
