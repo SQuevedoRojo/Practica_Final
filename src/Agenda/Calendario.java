@@ -13,7 +13,7 @@ public class Calendario implements Constantes_Colores
         GregorianCalendar fecha2 = new GregorianCalendar(anno, mes, primerDia);
         primerDia = fecha.get(GregorianCalendar.DAY_OF_WEEK);
 
-        System.out.println(Constantes_Colores.ANSI_BLUE_BACKGROUND+"L  M  X   J  V  S  D"+Constantes_Colores.ANSI_RESET);
+        System.out.println(Constantes_Colores.ANSI_BLUE_BACKGROUND+ANSI_BLACK+"L  M  X   J  V  S  D"+Constantes_Colores.ANSI_RESET);
         switch (primerDia) {
             case 1:
                 System.out.print("                  ");
@@ -47,7 +47,7 @@ public class Calendario implements Constantes_Colores
                 System.out.print(" ");
         }
         System.out.println("");
-    }
+    }//calendarioPorMes()
     
     private static void saberDia(int dia,GregorianCalendar fecha)
     {
@@ -67,5 +67,5 @@ public class Calendario implements Constantes_Colores
             else
                 System.out.print(Constantes_Colores.ANSI_GREEN + dia + Constantes_Colores.ANSI_RESET + " ");
         }
-    }
-}
+    }//saberDia()
+}//class

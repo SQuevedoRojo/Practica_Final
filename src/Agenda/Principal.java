@@ -281,7 +281,7 @@ public class Principal
     
     public void imprimirEventoEspecifico()
     {
-        int mes,dia,hora,minutos,pos;
+        int mes,dia,hora,minutos;
         do{
             mes = comprobarScanner("Introduce el mes que quieres ver los Eventos Creados -> ");
         }while(!(mes >= 1 && mes <= 12));
@@ -327,7 +327,7 @@ public class Principal
         do{
             mes = comprobarScanner("Introduce el mes del que quieres imprimir el calendario -> ");
         }while(!(mes >= 1 && mes <= 12));
-        Calendario.calendarioPorMes(mes, anno);;
+        Calendario.calendarioPorMes(mes, anno);
     }
     
 }//class
