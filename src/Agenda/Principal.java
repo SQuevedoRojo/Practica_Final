@@ -21,16 +21,42 @@ import java.util.Scanner;
 
 public class Principal 
 {
-    
+    /**
+     * Atributo estatico y constante de la clase Principal para guardar los meses que tiene un año
+     */
     private static final int MESES = 12;
+    /**
+     * Atributo estatico y constante de la clase Principal para guardar los dias que tiene un mes
+     */
     private static final int DIAS = 31;
+    /**
+     * Atributo del objeto principal encargada de leer datos introducidos por teclado
+     */
     private Scanner entrada = new Scanner(System.in);
+    /**
+     * Atributo constante del objeto principal encargado de controlar los dias de cada mes
+     */
     private final int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
+    /**
+     * Atributo del objeto principal encargado de guardar en un array bidimensional objetos Dias, y a su vez guardar los Eventos.
+     */
     private Dia[][] dias;
+    /**
+     * Atributo del objeto principal que es un objeto menu para que el usuario decida una opcion especifica
+     */
     private Menu menu;
+    /**
+     * Atributo del objeto principal para leer ficheros
+     */
     private FileReader fr = null;
+    /**
+     * Atributo del objeto principal para escribir en ficheros
+     */
     private FileWriter fw = null;
-    private int anno;
+    /**
+     * Atributo constante del objeto principal para guardar el año del cual quiere crear la agenda
+     */
+    private final int anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
     
     public Principal()
     {
@@ -44,6 +70,11 @@ public class Principal
         p.inicio();
     }//main()
     
+    /**
+     * Método encargado de la ejecución principal del programa
+     * @throws AWTException Excepciones que sirven para limpiar la pantalla
+     * @throws InterruptedException Excepciones que sirven para limpiar la pantalla 
+     */
     private void inicio() throws AWTException, InterruptedException
     {
         menu.opcionesPrincipales(this);
@@ -55,7 +86,6 @@ public class Principal
      */
     private int diasDisponibles()
     {
-        anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
         int diasFebrero = 28;
         if (annoBisiesto(anno))
             diasFebrero++;
@@ -277,9 +307,9 @@ public class Principal
                 if(dias[i][j] != null)
                     encontrado = dias[i][j].eliminarTarea(id);
         if(!encontrado)
-            System.out.println("\nNo se ha eliminado el Recordatorio porque no se ha encontado");
+            System.out.println("\nNo se ha eliminado la Tarea porque no se ha encontado");
         else
-            System.out.println("\nSe ha eliminado correctamente el Recordatorio");
+            System.out.println("\nSe ha eliminado correctamente la Tarea");
     }//borrarTarea()
     
     /**

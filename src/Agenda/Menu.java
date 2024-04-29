@@ -14,11 +14,10 @@ import java.util.Scanner;
 public class Menu 
 {
     private Scanner entrada = new Scanner(System.in);
-    public Menu() {}
     
     public void opcionesPrincipales(Principal p) throws AWTException, InterruptedException
     {
-        int opcionPrincipal = -1;
+        int opcionPrincipal;
         do {            
             limpiar();
             System.out.println("MENU");
@@ -62,7 +61,7 @@ public class Menu
         System.out.println("\nPulsa enter para continuar");
         entrada.nextLine();
         enter = entrada.nextLine();
-    }
+    }//continuar()
     
     public void limpiar() throws AWTException, InterruptedException
     {
@@ -76,7 +75,7 @@ public class Menu
     
     private void opcionesEventosTareas(Principal p) throws AWTException, InterruptedException
     {
-        int op = -1;
+        int op;
         limpiar();
         System.out.println("\n\t1.- Crear un Evento Recordatorio");
         System.out.println("\t2.- Crear un Evento Tarea");
@@ -119,7 +118,7 @@ public class Menu
     
     private void opcionesContactos(Principal p) throws AWTException, InterruptedException
     {
-        int op = -1;
+        int op;
         limpiar();
         System.out.println("\n\t1.- Leer Contactos");
         System.out.println("\t2.- Crear un Nuevo Contacto");
@@ -128,6 +127,7 @@ public class Menu
         System.out.println("\t5.- Guardar Contactos");
         System.out.println("\t6.- Salir");
         op = comprobarScanner(6);
+        limpiar();
         switch (op) 
         {
             case 1:p.leerFicheroContactos(); break;
