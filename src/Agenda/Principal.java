@@ -384,7 +384,14 @@ public class Principal
     
     public void leerEventosFichero()
     {
-        
+        String nomFic;
+        nomFic=entrada.nextLine();
+        try{
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        }finally{
+            
+        }
     }//leerEventosFichero()
     
     public void guardarEventosAnno()
@@ -397,11 +404,28 @@ public class Principal
     
     public void guardarEventosMes() //OPCIONALES
     {
-        
+        int mes;
+        do{
+            mes = comprobarScanner("Introduce el mes que quieres ver los Eventos Creados -> ");
+        }while(!(mes >= 1 && mes <= 12));
+        for (int i = 0; i < diasUtilizados[mes]; i++)
+            if (dias[mes-1][i] != null)
+                dias[mes-1][i].imprimirEventos();
     }//guardarEventosMes()
     
     public void guardarEventosDia() //OPCIONALES
     {
+        int mes,dia;
+        do{
+            mes = comprobarScanner("Introduce el mes que quieres crear el evento -> ");
+        }while(!(mes >= 1 && mes <= 12));
+        do{
+            dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
+            if (!(dia >= 1 && dia <= diasUtilizados[mes-1]))
+                System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
+        }while(!(dia >= 1 && dia <= diasUtilizados[mes-1]));
+        if (dias[mes-1][dia-1] != null)
+            dias[mes-1][dia-1].imprimirEventos();
         
     }//guardarEventosDia()
     

@@ -186,6 +186,10 @@ public class Dia {
                         hora1.imprimirInfo();
                 }
         }
+        
+        for (Evento e : eventosDiaEntero) {
+            e.imprimirInfo();
+        }
     }
     
 }
