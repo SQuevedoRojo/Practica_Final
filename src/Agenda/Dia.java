@@ -180,11 +180,11 @@ public class Dia {
     
     public void imprimirEventos()
     {
-        String cadena;
         for (ArrayList<Evento> hora : horas) {
-            for (Evento hora1 : hora) {
-                    hora1.imprimirInfo();
-            }
+            if(hora != null)
+                for (Evento hora1 : hora) {
+                        hora1.imprimirInfo();
+                }
         }
     }
     

@@ -56,13 +56,13 @@ public class Tarea extends Evento{
         FileWriter fw = null;
         try{
         LocalDateTime hoy = LocalDateTime.now();
-        fw =new FileWriter("./src/FICHEROS/agenda-"+hoy+"-dat");
-        PrintWriter pw = new PrintWriter(fw,true);
+        fw =new FileWriter("./src/FICHEROS/agenda-"+String.valueOf(hoy.getYear())+"-"+String.valueOf(hoy.getMonth())+"-"+String.valueOf(hoy.getDayOfMonth())+"_"+String.valueOf(hoy.getHour())+"-"+String.valueOf(hoy.getMinute())+".dat",true);
+        PrintWriter pw = new PrintWriter(fw);
         
         if (this.isDiaEntero())
-        pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth())+"|"+this.getNombre()+" | Recordatorio | "+comprobarUrgente(urgente));
+            pw.println("Dia Entero | Tarea | "+this.getNombre()+" | "+comprobarUrgente(urgente)+" | "+String.valueOf(tiempoEstimado.getHour())+":"+String.valueOf(tiempoEstimado.getMinute()));
         else
-        pw.println("Dia Entero | Recordatorio | "+this.getNombre()+" | "+comprobarUrgente(urgente)+" | "+String.valueOf(tiempoEstimado.getHour())+":"+String.valueOf(tiempoEstimado.getMinute()));
+            pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth())+"|"+this.getNombre()+" | Tarea | "+comprobarUrgente(urgente));
         
          pw.flush();
         

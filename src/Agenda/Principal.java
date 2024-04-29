@@ -389,7 +389,10 @@ public class Principal
     
     public void guardarEventosAnno()
     {
-
+        for (int i = 0; i < MESES; i++)
+            for (int j = 0; j < diasUtilizados[i]; j++)
+                if(dias[i][j] != null)
+                    dias[i][j].imprimirEventos();
     }//guardarEventosAnno()
     
     public void guardarEventosMes() //OPCIONALES
