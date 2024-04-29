@@ -57,11 +57,13 @@ public class Principal
      * Atributo constante del objeto principal para guardar el año del cual quiere crear la agenda
      */
     private final int anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
+    private ArrayList<Contacto> contactos;
     
     public Principal()
     {
         dias = new Dia[MESES][DIAS];
         menu = new Menu();
+        contactos = new ArrayList<Contacto>();
     }
     
     public static void main(String[] args) throws AWTException, InterruptedException 
@@ -412,7 +414,9 @@ public class Principal
         Calendario.calendarioPorMes(mes, anno);
     }//imprimirMesCalendario()
     
-    
+    /**
+     * Método invocado desde la clase Menu para leer desde un fichero los contactos y guardarlo en un ArrayList
+     */
     public void leerFicheroContactos()
     {
         try
@@ -423,7 +427,7 @@ public class Principal
             while(cadena != null)
             {
                 String campos[] = cadena.split("\\|");
-                System.out.println(campos[0] + " *** " + campos[1] + " *** " + campos[2]);
+                contactos.add(new Contacto(campos[1], campos[0], campos[2]));
                 cadena = br.readLine();
             }
         } 
@@ -447,5 +451,83 @@ public class Principal
                 System.out.println(e.getMessage());                                                               
             }
         }
+        System.out.println("Se han guardado todos los contactos en el ArrayList");
     }//leerFicheroContactos()
+    
+    public void guardarContactos()
+    {
+        String cadena;
+        try 
+        {
+            fw = new FileWriter("./src/FICHEROS/guardar-contactos.dat");
+            PrintWriter pw = new PrintWriter(fw);
+            for (Contacto contacto : contactos) 
+            {
+                cadena = contacto.getApellido() + "|" + contacto.getNombre() + "|" + contacto.getCorreo();
+                pw.println(cadena);
+            }
+            pw.flush();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());                                                                   
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (fw != null) 
+                    fw.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());                                                               
+            }
+        }
+        System.out.println("Se han guardado todos los contactos en el fichero llamado 'guardar-contactos.dat'");
+    }//guardarContactos()
+    
+    public void listarContactos()
+    {
+        for (Contacto contacto : contactos)
+            System.out.println(contacto.getApellido() + "|" + contacto.getNombre() + "|" + contacto.getCorreo());
+    }//listarContactos()
+    
+    public void crearContacto()
+    {
+        entrada.nextLine();
+        String nombre,apellidos,correo;
+        boolean repetido = false;
+        System.out.print("Introduce el nombre del contacto a crear -> ");
+        nombre = entrada.nextLine();
+        System.out.print("Introduce el apellido del contacto a crear -> ");
+        apellidos = entrada.nextLine();
+        System.out.print("Introduce el correo electronico del contacto a crear -> ");
+        correo = entrada.nextLine();
+        
+        for (Contacto contacto : contactos)
+            if(correo.equalsIgnoreCase(contacto.getCorreo()))
+            {
+                System.out.println("No se puede añadir el contacto porque ya existe ese correo electronico");
+                repetido = true;
+                break;
+            }
+        if(!repetido)
+            contactos.add(new Contacto(nombre, apellidos, correo));
+    }//crearContacto()
+    
+    public void buscarContacto()
+    {
+        entrada.nextLine();
+        String correo;
+        boolean encontrado = false;
+        System.out.print("Introduce el correo electronico del contacto a buscar -> ");
+        correo = entrada.nextLine();
+        for (Contacto contacto : contactos)
+            if(correo.equalsIgnoreCase(contacto.getCorreo()))
+            {
+                encontrado = true;
+                System.out.println("Contacto encontrado");
+                System.out.println(contacto.getApellido() + "|" + contacto.getNombre() + "|" + contacto.getCorreo());
+            }
+        if(encontrado == false)
+            System.out.println("Contacto no encontrado");
+    }//buscarContacto()
 }//class

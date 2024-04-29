@@ -131,10 +131,10 @@ public class Menu
         switch (op) 
         {
             case 1:p.leerFicheroContactos(); break;
-            case 2: break;
-            case 3: break;
-            case 4: break;
-            case 5: break;
+            case 2:p.crearContacto(); break;
+            case 3:p.listarContactos(); break;
+            case 4:p.buscarContacto(); break;
+            case 5:p.guardarContactos(); break;
         }
     }//opcionesContactos()
 }//class

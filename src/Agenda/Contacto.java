@@ -15,5 +15,17 @@ public class Contacto {
         this.apellido = apellido;
         this.correo = correo;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
     
 }
