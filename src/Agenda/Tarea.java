@@ -31,7 +31,9 @@ public class Tarea extends Evento{
     public LocalTime getTiempoEstimado() {
         return tiempoEstimado;
     }
-    
+    /**
+     * Metodo que imprime la informacion del evento
+     */
     @Override
     public void mostrarInformacion()
     {

@@ -46,7 +46,9 @@ public class Evento {
     public int getId() {
         return id;
     }
-    
+    /**
+     * Metodo que imprime la informacion del evento
+     */
     public void mostrarInformacion()
     {
         

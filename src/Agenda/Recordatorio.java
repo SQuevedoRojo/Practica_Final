@@ -24,7 +24,10 @@ public class Recordatorio extends Evento{
     public boolean isAnual() {
         return anual;
     }
-    
+    /**
+     * Metodo que imprime la informacion del evento
+     */
+    @Override
     public void mostrarInformacion()
     {
         super.mostrarInformacion();

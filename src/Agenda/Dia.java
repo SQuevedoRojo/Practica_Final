@@ -21,6 +21,22 @@ public class Dia {
         eventosDiaEntero= new ArrayList<Evento>();
     }
     
+    public ArrayList<Evento>[] getHoras() {
+        return horas;
+    }
+
+    public ArrayList<Evento> getEventosDiaEntero() {
+        return eventosDiaEntero;
+    }
+    
+    /**
+     * Metodo que crea un elemento recordatorio en el array list correspondiente
+     * 
+     * @param hora
+     * @param an
+     * @param nombre
+     * @param diaEnt 
+     */
     public void crearRecordatorio(LocalTime hora,boolean an,String nombre,boolean diaEnt){
         
         if (diaEnt)
@@ -38,6 +54,15 @@ public class Dia {
         }
     }
     
+    /**
+     * Metodo que crea un elemento tarea en el array list correspondiente
+     * 
+     * @param hora
+     * @param urg
+     * @param nombre
+     * @param diaEnt
+     * @param tiempo 
+     */
     public void crearTarea(LocalTime hora,boolean urg,String nombre,boolean diaEnt,LocalTime tiempo){
         
         if (diaEnt)
@@ -55,6 +80,12 @@ public class Dia {
         }
     }
     
+    /**
+     * Metodo que calcula la posicion en el array list de horas para la creacion de eventos
+     * 
+     * @param h
+     * @return 
+     */
     public int calculoPosicion(LocalTime h){
         int res;
         res=(h.getHour()*2)+(h.getMinute()!=0?1:0);
@@ -62,6 +93,12 @@ public class Dia {
         return res;
     }
     
+    /**
+     * Metodo el cual elimina un elemeno recordatorio del array list
+     * 
+     * @param id
+     * @return 
+     */
     public boolean eliminarRecordatorio(int id){
         boolean ok=false;
         
@@ -84,6 +121,12 @@ public class Dia {
         return ok;
     }
     
+    /**
+     * Metodo el cual elimina un elemeno tarea del array list 
+     * 
+     * @param id
+     * @return 
+     */
     public boolean eliminarTarea(int id){
         boolean ok=false;
         
@@ -106,6 +149,9 @@ public class Dia {
         return ok;
     }
     
+    /**
+     * Metodo el cual muesta la informacion de los array list
+     */
     public void tratarInfo(){
         for (int i = 0; i < horas.length; i++) {
             if (horas[i]!=null)
@@ -118,6 +164,11 @@ public class Dia {
         }
     }
     
+    /**
+     * Metodo el cual muestra la informacion de una hora especifica
+     * 
+     * @param pos 
+     */
     public void tratarInfoEspecifico(LocalTime pos){
         int posicion=calculoPosicion(pos);
             if (horas[posicion]!=null)
@@ -125,14 +176,5 @@ public class Dia {
                     horas[posicion].get(j).mostrarInformacion();
                 }
     }
-    
-    public ArrayList<Evento>[] getHoras() {
-        return horas;
-    }
-
-    public ArrayList<Evento> getEventosDiaEntero() {
-        return eventosDiaEntero;
-    }
-    
     
 }
