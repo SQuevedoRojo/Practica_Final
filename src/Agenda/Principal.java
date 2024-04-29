@@ -1,12 +1,15 @@
 package Agenda;
 
 import java.awt.AWTException;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -25,6 +28,7 @@ public class Principal
     private final int diasUtilizados[] = {31,diasDisponibles(),31,30,31,30,31,31,30,31,30,31};
     private Dia[][] dias;
     private Menu menu;
+    private FileReader fr = null;
     private FileWriter fw = null;
     private int anno;
     
@@ -43,9 +47,12 @@ public class Principal
     private void inicio() throws AWTException, InterruptedException
     {
         menu.opcionesPrincipales(this);
-
     }//inicio()
     
+    /**
+     * Método que comprueba si el año introducido por el usuario es bisiesto
+     * @return Dias que tiene el mes de febrero dependiendo del año
+     */
     private int diasDisponibles()
     {
         anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
@@ -55,13 +62,21 @@ public class Principal
         return diasFebrero;
     }//diasDisponibles()
     
+    /**
+     * Metodo para comprobar si el año es bisiesto
+     * @param anno Año introducido por el usuario
+     * @return True -> Año biesto ; False -> Año no bisiesto
+     */
     private boolean annoBisiesto(int anno)
     {
-        boolean bisiesto = false;
-        LocalDate fecha = LocalDate.of(anno,01,01);
-        return fecha.isLeapYear();
+        return Year.of(anno).isLeap();
     }//annoBisiesto()
     
+    /**
+     * Método que comprueba los datos cuando se tiene que llamar a un metodo de la clase Scanner, solo permite introducir numeros en un rango especifico
+     * @param mensaje Mensaje para el usuario
+     * @return Numero entero que cumple con las condiciones 
+     */
     private int comprobarScanner(String mensaje)
     {
         int opcion = -1;
@@ -80,6 +95,12 @@ public class Principal
         return opcion;
     }//comprobarScanner()
     
+    /**
+     * Método que se invoca desde la clase menu
+     * @param op Entero que sirve para distinguir de una Tarea o un Evento
+     * @throws AWTException Excepciones que sirven para limpiar la pantalla
+     * @throws InterruptedException Excepciones que sirven para limpiar la pantalla 
+     */
     public void crearEventos(int op) throws AWTException, InterruptedException
     {
         int mes,dia;
@@ -111,10 +132,15 @@ public class Principal
         }
     }//crearEventos()
     
+    /**
+     * Método para crear un Recordatorio
+     * @param mes Mes introducido por el usuario
+     * @param dia Dia introducido por el usuario
+     */
     private void crearRecordatorio(int mes,int dia)
     {
         int hora,minutos,anual,diaEntero;
-        boolean anno = false,diaentero = false;
+        boolean boolAnno,diaentero;
         String concepto;
         do{
             diaEntero = comprobarScanner("Introduce 1 si el Recordatorio es para el Dia Entero, sino introduzca 0 -> ");
@@ -135,8 +161,8 @@ public class Principal
             entrada.nextLine();
             concepto = entrada.nextLine();
             LocalTime tiempo = LocalTime.of(hora, minutos);
-            anno = anual == 1;
-            dias[mes][dia].crearRecordatorio(tiempo, anno, concepto, diaentero);
+            boolAnno = anual == 1;
+            dias[mes][dia].crearRecordatorio(tiempo, boolAnno, concepto, diaentero);
         }
         else
         {
@@ -146,17 +172,22 @@ public class Principal
             System.out.println("Introduzca el concepto del recordatorio -> ");
             entrada.nextLine();
             concepto = entrada.nextLine();
-            anno = anual == 1;
+            boolAnno = anual == 1;
             LocalTime l = null;
-            dias[mes][dia].crearRecordatorio(l, anno, concepto, diaentero);
+            dias[mes][dia].crearRecordatorio(l, boolAnno, concepto, diaentero);
         }
         
     }//crearRecordatorio()
     
+    /**
+     * Método para crear una Tarea
+     * @param mes Mes introducido por el usuario
+     * @param dia Dia introducido por el usuario
+     */
     private void crearTarea(int mes,int dia)
     {
         int hora,minutos,diaEntero,horaEstimada,minutosEstimados,urgente;
-        boolean diaentero = false,urg = false;
+        boolean diaentero,urg;
         LocalTime horaEst,horaEvento;
         String concepto;
         do{
@@ -211,6 +242,9 @@ public class Principal
         }
     }//crearTarea()
     
+    /**
+     * Método invocado desde la clase Menu para borrar un Recordatorio con un ID
+     */
     public void borrarRecordatorio()
     {
         int id;
@@ -228,6 +262,9 @@ public class Principal
             System.out.println("\nSe ha eliminado correctamente el Recordatorio");
     }//borrarRecordatorio()
     
+    /**
+     * Método invocado desde la clase Menu para borrar una Tarea con un ID
+     */
     public void borrarTarea()
     {
         int id;
@@ -245,6 +282,9 @@ public class Principal
             System.out.println("\nSe ha eliminado correctamente el Recordatorio");
     }//borrarTarea()
     
+    /**
+     * Metodo llamado desde la clase Menu para imprimir los eventos que hay en un dia en especifico
+     */
     public void imprimirEventosDia()
     {
         int mes,dia;
@@ -260,6 +300,9 @@ public class Principal
                 dias[mes-1][dia-1].tratarInfo();
     }//imprimirEventosDia()
     
+    /**
+     * Método llamado desde la clase Menu para imprimir todods los eventos que haya un mes 
+     */
     public void imprimirEventosMes()
     {
         int mes;
@@ -271,6 +314,9 @@ public class Principal
                 dias[mes-1][i].tratarInfo();
     }//imprimirEventosMes()
     
+    /**
+     * Método llamado desde la clase Menu para imprimir todos los eventos que se hayan creado en toda la agenda
+     */
     public void imprimirTodosLosEventos()
     {
         for (int i = 0; i < MESES; i++)
@@ -279,6 +325,9 @@ public class Principal
                     dias[i][j].tratarInfo();
     }//imprimirTodosLosEventos()
     
+    /**
+     * Metodo llamado desde la clase Menu para imprimir los eventos que haya en una hora especifica y en un dia especifico
+     */
     public void imprimirEventoEspecifico()
     {
         int mes,dia,hora,minutos;
@@ -311,16 +360,19 @@ public class Principal
 
     }//guardarEventosAnno()
     
-    public void guardarEventosMes()
+    public void guardarEventosMes() //OPCIONALES
     {
         
     }//guardarEventosMes()
     
-    public void guardarEventosDia()
+    public void guardarEventosDia() //OPCIONALES
     {
         
     }//guardarEventosDia()
     
+    /**
+     * Método llamado desde la clase Menu para imprimir un mes en forma de un calendario
+     */
     public void imprimirMesCalendario()
     {
         int mes;
@@ -328,6 +380,42 @@ public class Principal
             mes = comprobarScanner("Introduce el mes del que quieres imprimir el calendario -> ");
         }while(!(mes >= 1 && mes <= 12));
         Calendario.calendarioPorMes(mes, anno);
-    }
+    }//imprimirMesCalendario()
     
+    
+    public void leerFicheroContactos()
+    {
+        try
+        {
+            fr = new FileReader("./src/FICHEROS/contactos.dat");
+            BufferedReader br = new BufferedReader(fr);
+            String cadena = br.readLine();
+            while(cadena != null)
+            {
+                String campos[] = cadena.split("\\|");
+                System.out.println(campos[0] + " *** " + campos[1] + " *** " + campos[2]);
+                cadena = br.readLine();
+            }
+        } 
+        catch (FileNotFoundException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        catch (IOException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        finally 
+        {
+            try 
+            {
+                if (fr != null) 
+                    fr.close();
+            } 
+            catch (IOException e) 
+            {
+                System.out.println(e.getMessage());                                                               
+            }
+        }
+    }//leerFicheroContactos()
 }//class
