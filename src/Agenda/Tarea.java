@@ -1,5 +1,9 @@
 package Agenda;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -45,5 +49,53 @@ public class Tarea extends Evento{
         }
         else
             System.out.println("TAREA NO URGENTE");
+    }
+    
+    @Override
+    public void imprimirInfo(){
+        FileWriter fw = null;
+        try{
+        LocalDateTime hoy = LocalDateTime.now();
+        fw =new FileWriter("./src/FICHEROS/agenda-"+hoy+"-dat");
+        PrintWriter pw = new PrintWriter(fw,true);
+        
+        if (this.isDiaEntero())
+        pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth())+"|"+this.getNombre()+" | Recordatorio | "+comprobarUrgente(urgente));
+        else
+        pw.println("Dia Entero | Recordatorio | "+this.getNombre()+" | "+comprobarUrgente(urgente)+" | "+String.valueOf(tiempoEstimado.getHour())+":"+String.valueOf(tiempoEstimado.getMinute()));
+        
+         pw.flush();
+        
+        }
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());                                                                   
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (fw != null) 
+                    fw.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());                                                               
+            }
+        }
+    }
+    
+    public String comprobarUrgente(boolean urg)
+    {
+        String cade;
+        
+        if (urg) 
+        {
+            cade="Es urgente";    
+        }
+        else
+        {
+            cade="No es urgente";
+        }
+        
+        return cade;
     }
 }

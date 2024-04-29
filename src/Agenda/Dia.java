@@ -1,5 +1,6 @@
 package Agenda;
 
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -175,6 +176,16 @@ public class Dia {
                 for (int j = 0; j < horas[posicion].size(); j++) {
                     horas[posicion].get(j).mostrarInformacion();
                 }
+    }
+    
+    public void imprimirEventos()
+    {
+        String cadena;
+        for (ArrayList<Evento> hora : horas) {
+            for (Evento hora1 : hora) {
+                    hora1.imprimirInfo();
+            }
+        }
     }
     
 }

@@ -1,14 +1,13 @@
 package Agenda;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * Clase Padre de Tarea y Recordatorio
  * @author Asier Sergio
  * @version 1.0
  */
-public class Evento {
+public abstract class Evento {
     private int id;
     private static int sigId=1;
     private String nombre;
@@ -65,4 +64,5 @@ public class Evento {
         }
         System.out.println("EL CONCEPTO ES : \n\t" + nombre);
     }
+    public abstract void imprimirInfo();
 }
