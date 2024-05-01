@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -384,15 +385,161 @@ public class Principal
     
     public void leerEventosFichero()
     {
+        entrada.nextLine();
         String nomFic;
+        System.out.print("Introduce el nombre del fichero incluyendo la extension del mismo -> ");
         nomFic=entrada.nextLine();
-        try{
-        }catch(Exception e ){
+        try {
+            fr = new FileReader("./src/FICHEROS/"+nomFic);
+            BufferedReader br = new BufferedReader(fr);
+            String info = br.readLine();
+            while (info != null) 
+            {
+                String campos[] = info.split("\\|");
+                saberCampos(campos);
+                info = br.readLine();
+            }
+        } 
+        catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        }finally{
-            
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (fr != null) 
+                    fr.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());                                                               
+            }
         }
     }//leerEventosFichero()
+    
+    private void saberCampos(String campos[])
+    {
+        try
+        {
+            LocalDate fechaEvento;
+            boolean diaentero = false;
+            if(campos[0].trim().equalsIgnoreCase("Dia Entero"))
+            {
+                diaentero = true;
+                String fecha[] = campos[1].split("\\-");
+                fechaEvento = LocalDate.of(Integer.parseInt(fecha[0]), saberMes(fecha[1].trim()), Integer.parseInt(fecha[2]));
+                if(campos[2].trim().equalsIgnoreCase("Recordatorio"))
+                {
+                    boolean anual = false;
+                    String concepto = campos[3].trim();
+                    if(campos[4].trim().equalsIgnoreCase("Es anual"))
+                        anual = true;
+                    annadirRecordatorio(diaentero, fechaEvento, anual, concepto, null);
+                }
+                else
+                {
+                    boolean urgente = false;
+                    String concepto = campos[3].trim();
+                    LocalTime duracion;
+                    String tDuracion[] = campos[5].split("\\:");
+                    if(campos[4].trim().equalsIgnoreCase("Es urgente"))
+                        urgente = true;
+                    duracion = LocalTime.of(Integer.parseInt(tDuracion[0]), Integer.parseInt(tDuracion[1]));
+                    annadirTarea(diaentero, fechaEvento, urgente, concepto,null,duracion);
+                }
+            }
+            else
+            {
+                String fecha[] = campos[0].split("\\-");
+                fechaEvento = LocalDate.of(Integer.parseInt(fecha[0]), saberMes(fecha[1].trim()), Integer.parseInt(fecha[2]));
+                String thora[] = campos[1].split("\\:");
+                String concepto = campos[3].trim();
+                LocalTime hora = LocalTime.of(Integer.parseInt(thora[0]), Integer.parseInt(thora[1]));
+                if(campos[2].trim().equalsIgnoreCase("Recordatorio"))
+                {
+                    boolean anual = false;
+                    if(campos[4].trim().equalsIgnoreCase("Es anual"))
+                        anual = true;
+                    annadirRecordatorio(diaentero, fechaEvento, anual, concepto, hora);
+                }
+                else
+                {
+                    boolean urgente = false;
+                    String tDuracion[] = campos[5].split("\\:");
+                    LocalTime duracion;
+                    if(campos[4].trim().equalsIgnoreCase("Es urgente"))
+                        urgente = true;
+                    duracion = LocalTime.of(Integer.parseInt(tDuracion[0]), Integer.parseInt(tDuracion[1]));
+                    annadirTarea(diaentero, fechaEvento, urgente, concepto, hora, duracion);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("No se ha podido cargar el evento del fichero");
+        }
+    }//separarCampos()
+    
+    private void annadirRecordatorio(boolean diaentero,LocalDate fecha,boolean anual,String concepto,LocalTime hora)
+    {
+        if(diaentero)
+            if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(null, anual, concepto, diaentero);
+            else
+            {
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(null, anual, concepto, diaentero);
+            }
+        else
+            if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(hora, anual, concepto, diaentero);
+            else
+            {
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(hora, anual, concepto, diaentero);
+            }
+            
+    }//annadirRecordatorio()
+    
+    private void annadirTarea(boolean diaentero,LocalDate fecha,boolean urgente,String concepto,LocalTime hora,LocalTime duracion)
+    {
+        if(diaentero)
+            if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(null,urgente,concepto, diaentero,duracion);
+            else
+            {
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(null,urgente,concepto, diaentero,duracion);
+            }
+        else
+            if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(hora,urgente,concepto, diaentero,duracion);
+            else
+            {
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(hora,urgente,concepto, diaentero,duracion);
+            }
+    }//annadirTarea()
+    
+    private Month saberMes(String mes)
+    {
+        Month enumMes = null;
+        switch (mes) 
+        {
+            case "JANUARY" -> enumMes = Month.JANUARY;
+            case "FEBRUARY" -> enumMes = Month.FEBRUARY;
+            case "MARCH" -> enumMes = Month.MARCH;
+            case "APRIL" -> enumMes = Month.APRIL;
+            case "MAY" -> enumMes = Month.MAY;
+            case "JUNE" -> enumMes = Month.JUNE;
+            case "JULY" -> enumMes = Month.JULY;
+            case "AUGUST" -> enumMes = Month.AUGUST;
+            case "SEPTEMBER" -> enumMes = Month.SEPTEMBER;
+            case "OCTOBER" -> enumMes = Month.OCTOBER;
+            case "NOVEMBER" -> enumMes = Month.NOVEMBER;
+            case "DECEMBER" -> enumMes = Month.DECEMBER;
+        }
+        return enumMes;
+    }//saberMes()
     
     public void guardarEventosAnno()
     {

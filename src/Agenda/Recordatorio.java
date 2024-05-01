@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -40,7 +41,7 @@ public class Recordatorio extends Evento{
     }
     
     @Override
-    public void imprimirInfo(){
+    public void imprimirInfo(LocalDate fecha){
         FileWriter fw = null;
         try{
         LocalDateTime hoy = LocalDateTime.now();
@@ -48,9 +49,9 @@ public class Recordatorio extends Evento{
         PrintWriter pw = new PrintWriter(fw);
         
         if (this.isDiaEntero())
-            pw.println("Dia Entero | Recordatorio | "+this.getNombre()+" | "+comprobarAnual(anual));
+            pw.println("Dia Entero|"+ String.valueOf(fecha.getYear())+"-"+String.valueOf(fecha.getMonth())+"-"+ String.valueOf(fecha.getDayOfMonth()) +"|Recordatorio|"+this.getNombre()+"|"+comprobarAnual(anual));
         else
-            pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth())+"|"+this.getNombre()+" | Recordatorio | "+comprobarAnual(anual));
+            pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth()) + "-" +String.valueOf(this.getFechaHora().getDayOfMonth())+"|"+String.valueOf(this.getFechaHora().getHour())+":"+String.valueOf(this.getFechaHora().getMinute())+"|Recordatorio|"+this.getNombre()+"|"+comprobarAnual(anual));
         pw.flush();
         
         }

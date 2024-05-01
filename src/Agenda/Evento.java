@@ -1,5 +1,6 @@
 package Agenda;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -64,5 +65,5 @@ public abstract class Evento {
         }
         System.out.println("EL CONCEPTO ES : \n\t" + nombre);
     }
-    public abstract void imprimirInfo();
+    public abstract void imprimirInfo(LocalDate fecha);
 }

@@ -183,12 +183,12 @@ public class Dia {
         for (ArrayList<Evento> hora : horas) {
             if(hora != null)
                 for (Evento hora1 : hora) {
-                        hora1.imprimirInfo();
+                        hora1.imprimirInfo(fecha);
                 }
         }
         
         for (Evento e : eventosDiaEntero) {
-            e.imprimirInfo();
+            e.imprimirInfo(fecha);
         }
     }
     

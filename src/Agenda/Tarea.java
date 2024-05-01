@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -52,7 +53,7 @@ public class Tarea extends Evento{
     }
     
     @Override
-    public void imprimirInfo(){
+    public void imprimirInfo(LocalDate fecha){
         FileWriter fw = null;
         try{
         LocalDateTime hoy = LocalDateTime.now();
@@ -60,9 +61,9 @@ public class Tarea extends Evento{
         PrintWriter pw = new PrintWriter(fw);
         
         if (this.isDiaEntero())
-            pw.println("Dia Entero | Tarea | "+this.getNombre()+" | "+comprobarUrgente(urgente)+" | "+String.valueOf(tiempoEstimado.getHour())+":"+String.valueOf(tiempoEstimado.getMinute()));
+            pw.println("Dia Entero|"+ String.valueOf(fecha.getYear())+"-"+String.valueOf(fecha.getMonth())+"-"+ String.valueOf(fecha.getDayOfMonth()) +"|Tarea|"+this.getNombre()+"|"+comprobarUrgente(urgente)+"|"+String.valueOf(tiempoEstimado.getHour())+":"+String.valueOf(tiempoEstimado.getMinute()));
         else
-            pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth())+"|"+this.getNombre()+" | Tarea | "+comprobarUrgente(urgente));
+            pw.println(String.valueOf(this.getFechaHora().getYear())+"-"+String.valueOf(this.getFechaHora().getMonth()) + "-" +String.valueOf(this.getFechaHora().getDayOfMonth())+"|"+String.valueOf(this.getFechaHora().getHour())+":"+String.valueOf(this.getFechaHora().getMinute())+"|Tarea|"+this.getNombre()+"|"+comprobarUrgente(urgente)+"|"+String.valueOf(tiempoEstimado.getHour())+":"+String.valueOf(tiempoEstimado.getMinute()));
         
          pw.flush();
         
