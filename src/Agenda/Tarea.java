@@ -53,7 +53,7 @@ public class Tarea extends Evento{
     }
     
     @Override
-    public void imprimirInfo(LocalDate fecha){
+    public void imprimirInfo(LocalDate fecha,String nombre){
         FileWriter fw = null;
         try{
         LocalDateTime hoy = LocalDateTime.now();

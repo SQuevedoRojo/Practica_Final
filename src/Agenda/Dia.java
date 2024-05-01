@@ -207,17 +207,17 @@ public class Dia {
                 }
     }
     
-    public void imprimirEventos()
+    public void imprimirEventos(String nombre)
     {
         for (ArrayList<Evento> hora : horas) {
             if(hora != null)
                 for (Evento hora1 : hora) {
-                        hora1.imprimirInfo(fecha);
+                        hora1.imprimirInfo(fecha, nombre);
                 }
         }
         
         for (Evento e : eventosDiaEntero) {
-            e.imprimirInfo(fecha);
+            e.imprimirInfo(fecha,nombre);
         }
     }
     

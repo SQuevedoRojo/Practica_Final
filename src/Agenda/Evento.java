@@ -65,5 +65,5 @@ public abstract class Evento {
         }
         System.out.println("EL CONCEPTO ES : \n\t" + nombre);
     }
-    public abstract void imprimirInfo(LocalDate fecha);
+    public abstract void imprimirInfo(LocalDate fecha,String nombre);
 }

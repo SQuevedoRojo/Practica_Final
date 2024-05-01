@@ -59,7 +59,8 @@ public class Principal implements Constantes_Colores
      */
     private final int anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
     private ArrayList<Contacto> contactos;
-    private boolean ficheroCargado = true;
+    private boolean ficheroNoGuardado = true;
+    private boolean contactoNoGuardado = true;
     
     public Principal()
     {
@@ -386,7 +387,7 @@ public class Principal implements Constantes_Colores
     
     public void leerEventosFichero()
     {
-        if(ficheroCargado)
+        if(ficheroNoGuardado)
         {
             entrada.nextLine();
             String nomFic;
@@ -417,7 +418,7 @@ public class Principal implements Constantes_Colores
                     System.out.println(e.getMessage());                                                               
                 }
             }
-            ficheroCargado = false;
+            ficheroNoGuardado = false;
         }
         else
             System.out.println(Constantes_Colores.ANSI_RED_BACKGROUND+Constantes_Colores.ANSI_BLACK+"Guarde los cambios de los eventos a un fichero para poder realizar esta opcion"+Constantes_Colores.ANSI_RESET);
@@ -553,36 +554,36 @@ public class Principal implements Constantes_Colores
         for (int i = 0; i < MESES; i++)
             for (int j = 0; j < diasUtilizados[i]; j++)
                 if(dias[i][j] != null)
-                    dias[i][j].imprimirEventos();
-        ficheroCargado = true;
+                    dias[i][j].imprimirEventos("AÑO");
+        ficheroNoGuardado = true;
     }//guardarEventosAnno()
     
     public void guardarEventosMes() //OPCIONALES
     {
         int mes;
         do{
-            mes = comprobarScanner("Introduce el mes que quieres ver los Eventos Creados -> ");
+            mes = comprobarScanner("Introduce el mes del que quieres guardar los Eventos Creados -> ");
         }while(!(mes >= 1 && mes <= 12));
         for (int i = 0; i < diasUtilizados[mes]; i++)
             if (dias[mes-1][i] != null)
-                dias[mes-1][i].imprimirEventos();
-        ficheroCargado = true;
+                dias[mes-1][i].imprimirEventos("MES");
+        ficheroNoGuardado = true;
     }//guardarEventosMes()
     
     public void guardarEventosDia() //OPCIONALES
     {
         int mes,dia;
         do{
-            mes = comprobarScanner("Introduce el mes que quieres crear el evento -> ");
+            mes = comprobarScanner("Introduce el mesdel que quieres guardar los Eventos creados -> ");
         }while(!(mes >= 1 && mes <= 12));
         do{
-            dia = comprobarScanner("Introduce el dia que quieres crear el evento -> ");
+            dia = comprobarScanner("Introduce el dia del que quieres guardar los Eventos creados -> ");
             if (!(dia >= 1 && dia <= diasUtilizados[mes-1]))
                 System.out.println("Los dias seleccionados no estan disponibles para el mes " + mes);
         }while(!(dia >= 1 && dia <= diasUtilizados[mes-1]));
         if (dias[mes-1][dia-1] != null)
-            dias[mes-1][dia-1].imprimirEventos();
-        ficheroCargado = true;
+            dias[mes-1][dia-1].imprimirEventos("DIA");
+        ficheroNoGuardado = true;
     }//guardarEventosDia()
     
     /**
@@ -602,39 +603,43 @@ public class Principal implements Constantes_Colores
      */
     public void leerFicheroContactos()
     {
-        try
+        if(contactoNoGuardado)
         {
-            fr = new FileReader("./src/FICHEROS/contactos.dat");
-            BufferedReader br = new BufferedReader(fr);
-            String cadena = br.readLine();
-            while(cadena != null)
+            try
             {
-                String campos[] = cadena.split("\\|");
-                contactos.add(new Contacto(campos[1], campos[0], campos[2]));
-                cadena = br.readLine();
-            }
-        } 
-        catch (FileNotFoundException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        catch (IOException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        finally 
-        {
-            try 
-            {
-                if (fr != null) 
-                    fr.close();
+                fr = new FileReader("./src/FICHEROS/contactos.dat");
+                BufferedReader br = new BufferedReader(fr);
+                String cadena = br.readLine();
+                while(cadena != null)
+                {
+                    String campos[] = cadena.split("\\|");
+                    contactos.add(new Contacto(campos[1], campos[0], campos[2]));
+                    cadena = br.readLine();
+                }
             } 
+            catch (FileNotFoundException e) 
+            {
+                System.out.println(e.getMessage());
+            }
             catch (IOException e) 
             {
-                System.out.println(e.getMessage());                                                               
+                System.out.println(e.getMessage());
+            }
+            finally 
+            {
+                try 
+                {
+                    if (fr != null) 
+                        fr.close();
+                } 
+                catch (IOException e) 
+                {
+                    System.out.println(e.getMessage());                                                               
+                }
             }
         }
-        System.out.println("Se han guardado todos los contactos en el ArrayList");
+        else
+            System.out.println("Debe guardar los contactos para poder cargar de nuevo el fichero de contactos");
     }//leerFicheroContactos()
     
     public void guardarContactos()

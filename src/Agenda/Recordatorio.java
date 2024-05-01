@@ -41,11 +41,11 @@ public class Recordatorio extends Evento{
     }
     
     @Override
-    public void imprimirInfo(LocalDate fecha){
+    public void imprimirInfo(LocalDate fecha,String nombre){
         FileWriter fw = null;
         try{
         LocalDateTime hoy = LocalDateTime.now();
-        fw =new FileWriter("./src/FICHEROS/agenda-"+String.valueOf(hoy.getYear())+"-"+String.valueOf(hoy.getMonth())+"-"+String.valueOf(hoy.getDayOfMonth())+"_"+String.valueOf(hoy.getHour())+"-"+String.valueOf(hoy.getMinute())+".dat",true);
+        fw =new FileWriter("./src/FICHEROS/agenda-"+String.valueOf(hoy.getYear())+"-"+String.valueOf(hoy.getMonth())+"-"+String.valueOf(hoy.getDayOfMonth())+"_"+String.valueOf(hoy.getHour())+"-"+String.valueOf(hoy.getMinute())+"-"+nombre+".dat",true);
         PrintWriter pw = new PrintWriter(fw);
         
         if (this.isDiaEntero())
