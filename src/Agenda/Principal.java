@@ -59,7 +59,7 @@ public class Principal implements Constantes_Colores
      */
     private final int anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
     private ArrayList<Contacto> contactos;
-    private boolean ficheroCargado = false;
+    private boolean ficheroCargado = true;
     
     public Principal()
     {
@@ -432,7 +432,7 @@ public class Principal implements Constantes_Colores
             if(campos[0].trim().equalsIgnoreCase("Dia Entero"))
             {
                 diaentero = true;
-                String fecha[] = campos[1].split("\\-");
+                String fecha[] = campos[1].split("-");
                 fechaEvento = LocalDate.of(Integer.parseInt(fecha[0]), saberMes(fecha[1].trim()), Integer.parseInt(fecha[2]));
                 if(campos[2].trim().equalsIgnoreCase("Recordatorio"))
                 {
@@ -447,7 +447,7 @@ public class Principal implements Constantes_Colores
                     boolean urgente = false;
                     String concepto = campos[3].trim();
                     LocalTime duracion;
-                    String tDuracion[] = campos[5].split("\\:");
+                    String tDuracion[] = campos[5].split(":");
                     if(campos[4].trim().equalsIgnoreCase("Es urgente"))
                         urgente = true;
                     duracion = LocalTime.of(Integer.parseInt(tDuracion[0]), Integer.parseInt(tDuracion[1]));
@@ -456,9 +456,9 @@ public class Principal implements Constantes_Colores
             }
             else
             {
-                String fecha[] = campos[0].split("\\-");
+                String fecha[] = campos[0].split("-");
                 fechaEvento = LocalDate.of(Integer.parseInt(fecha[0]), saberMes(fecha[1].trim()), Integer.parseInt(fecha[2]));
-                String thora[] = campos[1].split("\\:");
+                String thora[] = campos[1].split(":");
                 String concepto = campos[3].trim();
                 LocalTime hora = LocalTime.of(Integer.parseInt(thora[0]), Integer.parseInt(thora[1]));
                 if(campos[2].trim().equalsIgnoreCase("Recordatorio"))
@@ -471,7 +471,7 @@ public class Principal implements Constantes_Colores
                 else
                 {
                     boolean urgente = false;
-                    String tDuracion[] = campos[5].split("\\:");
+                    String tDuracion[] = campos[5].split(":");
                     LocalTime duracion;
                     if(campos[4].trim().equalsIgnoreCase("Es urgente"))
                         urgente = true;
@@ -490,19 +490,19 @@ public class Principal implements Constantes_Colores
     {
         if(diaentero)
             if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(null, anual, concepto, diaentero);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, anual, concepto, diaentero,false,null);
             else
             {
                 dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(null, anual, concepto, diaentero);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, anual, concepto, diaentero,false,null);
             }
         else
             if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(hora, anual, concepto, diaentero);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, anual, concepto, diaentero,false,null);
             else
             {
                 dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearRecordatorio(hora, anual, concepto, diaentero);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, anual, concepto, diaentero,false,null);
             }
             
     }//annadirRecordatorio()
@@ -511,19 +511,19 @@ public class Principal implements Constantes_Colores
     {
         if(diaentero)
             if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(null,urgente,concepto, diaentero,duracion);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, false, concepto, diaentero, urgente, hora);
             else
             {
                 dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(null,urgente,concepto, diaentero,duracion);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, false, concepto, diaentero, urgente, hora);
             }
         else
             if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(hora,urgente,concepto, diaentero,duracion);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, false, concepto, diaentero, urgente, hora);
             else
             {
                 dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearTarea(hora,urgente,concepto, diaentero,duracion);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, false, concepto, diaentero, urgente, hora);
             }
     }//annadirTarea()
     

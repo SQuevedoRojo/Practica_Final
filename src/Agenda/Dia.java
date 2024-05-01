@@ -55,6 +55,35 @@ public class Dia {
         }
     }
     
+    
+    public void crearEventosFichero(LocalTime hora,boolean an,String nombre,boolean diaEnt,boolean urg,LocalTime tiempo){
+        
+        boolean encontrado = false;
+        if(diaEnt)
+        {
+            for (int i = 0; i < eventosDiaEntero.size() && !encontrado; i++)
+                if(nombre.equalsIgnoreCase(eventosDiaEntero.get(i).getNombre()))
+                    encontrado = true;
+        }
+        else
+        {
+            int pos = calculoPosicion(hora);
+            if(horas[pos] != null)
+                for (int i = 0; i < horas[pos].size() && !encontrado; i++)
+                    if(nombre.equalsIgnoreCase(horas[pos].get(i).getNombre()))
+                        encontrado = true;
+        }
+        if(!encontrado)
+        {
+            System.out.println("Evento añadido al programa");
+            if(urg == false && tiempo == null)
+                crearRecordatorio(hora, an, nombre, diaEnt);
+            else
+                crearTarea(hora, urg, nombre, diaEnt, tiempo);
+        }
+    }//crearRecordatorioFichero()
+    
+    
     /**
      * Metodo que crea un elemento tarea en el array list correspondiente
      * 
