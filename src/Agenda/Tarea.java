@@ -46,7 +46,8 @@ public class Tarea extends Evento{
         if(urgente)
         {
             System.out.println("TAREA URGENTE");
-            System.out.println("DURACION APROXIMADA DE " + tiempoEstimado);
+            if(!this.isDiaEntero())
+                System.out.println("DURACION APROXIMADA DE " + tiempoEstimado);
         }
         else
             System.out.println("TAREA NO URGENTE");
