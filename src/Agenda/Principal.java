@@ -20,7 +20,7 @@ import java.util.Scanner;
  * @version 1.0
  */
 
-public class Principal 
+public class Principal implements Constantes_Colores
 {
     /**
      * Atributo estatico y constante de la clase Principal para guardar los meses que tiene un año
@@ -59,6 +59,7 @@ public class Principal
      */
     private final int anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
     private ArrayList<Contacto> contactos;
+    private boolean ficheroCargado = false;
     
     public Principal()
     {
@@ -385,35 +386,41 @@ public class Principal
     
     public void leerEventosFichero()
     {
-        entrada.nextLine();
-        String nomFic;
-        System.out.print("Introduce el nombre del fichero incluyendo la extension del mismo -> ");
-        nomFic=entrada.nextLine();
-        try {
-            fr = new FileReader("./src/FICHEROS/"+nomFic);
-            BufferedReader br = new BufferedReader(fr);
-            String info = br.readLine();
-            while (info != null) 
-            {
-                String campos[] = info.split("\\|");
-                saberCampos(campos);
-                info = br.readLine();
-            }
-        } 
-        catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        finally {
+        if(ficheroCargado)
+        {
+            entrada.nextLine();
+            String nomFic;
+            System.out.print("Introduce el nombre del fichero incluyendo la extension del mismo -> ");
+            nomFic=entrada.nextLine();
             try {
-                if (fr != null) 
-                    fr.close();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());                                                               
+                fr = new FileReader("./src/FICHEROS/"+nomFic);
+                BufferedReader br = new BufferedReader(fr);
+                String info = br.readLine();
+                while (info != null) 
+                {
+                    String campos[] = info.split("\\|");
+                    saberCampos(campos);
+                    info = br.readLine();
+                }
+            } 
+            catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
             }
+            catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            finally {
+                try {
+                    if (fr != null) 
+                        fr.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());                                                               
+                }
+            }
+            ficheroCargado = false;
         }
+        else
+            System.out.println(Constantes_Colores.ANSI_RED_BACKGROUND+Constantes_Colores.ANSI_BLACK+"Guarde los cambios de los eventos a un fichero para poder realizar esta opcion"+Constantes_Colores.ANSI_RESET);
     }//leerEventosFichero()
     
     private void saberCampos(String campos[])
@@ -547,6 +554,7 @@ public class Principal
             for (int j = 0; j < diasUtilizados[i]; j++)
                 if(dias[i][j] != null)
                     dias[i][j].imprimirEventos();
+        ficheroCargado = true;
     }//guardarEventosAnno()
     
     public void guardarEventosMes() //OPCIONALES
@@ -558,6 +566,7 @@ public class Principal
         for (int i = 0; i < diasUtilizados[mes]; i++)
             if (dias[mes-1][i] != null)
                 dias[mes-1][i].imprimirEventos();
+        ficheroCargado = true;
     }//guardarEventosMes()
     
     public void guardarEventosDia() //OPCIONALES
@@ -573,7 +582,7 @@ public class Principal
         }while(!(dia >= 1 && dia <= diasUtilizados[mes-1]));
         if (dias[mes-1][dia-1] != null)
             dias[mes-1][dia-1].imprimirEventos();
-        
+        ficheroCargado = true;
     }//guardarEventosDia()
     
     /**
