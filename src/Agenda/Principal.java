@@ -58,8 +58,17 @@ public class Principal implements Constantes_Colores
      * Atributo constante del objeto principal para guardar el año del cual quiere crear la agenda
      */
     private final int anno = comprobarScanner("\tIntroduce el año que desee para crear la agenda -> ");
+    /**
+     * Atributo del objeto principal encargado de guardar los contactos del usuario
+     */
     private ArrayList<Contacto> contactos;
+    /**
+     * Atributo booleano para que al cargar de un fichero los Eventos, deba guardar los Eventos en un fichero para poder cargar de nuevo
+     */
     private boolean ficheroNoGuardado = true;
+    /**
+     * Atributo booleano para que al cargar de un fichero los Contactos, deba guardar los Contactos en un fichero para poder cargar de nuevo
+     */
     private boolean contactoNoGuardado = true;
     
     public Principal()
@@ -278,7 +287,7 @@ public class Principal implements Constantes_Colores
     }//crearTarea()
     
     /**
-     * Método invocado desde la clase Menu para borrar un Recordatorio con un ID
+     * Método llamado desde la clase Menu para borrar un Recordatorio con un ID
      */
     public void borrarRecordatorio()
     {
@@ -298,7 +307,7 @@ public class Principal implements Constantes_Colores
     }//borrarRecordatorio()
     
     /**
-     * Método invocado desde la clase Menu para borrar una Tarea con un ID
+     * Método llamado desde la clase Menu para borrar una Tarea con un ID
      */
     public void borrarTarea()
     {
@@ -385,6 +394,9 @@ public class Principal implements Constantes_Colores
             dias[mes-1][dia-1].tratarInfoEspecifico(tiempo);
     }//imprimirEventoEspecifico()
     
+    /**
+     * Método llamado desde la clase Menu para poder leer desde un fichero los Eventos y cargarlos en memoria
+     */
     public void leerEventosFichero()
     {
         if(ficheroNoGuardado)
@@ -424,6 +436,11 @@ public class Principal implements Constantes_Colores
             System.out.println(Constantes_Colores.ANSI_RED_BACKGROUND+Constantes_Colores.ANSI_BLACK+"Guarde los cambios de los eventos a un fichero para poder realizar esta opcion"+Constantes_Colores.ANSI_RESET);
     }//leerEventosFichero()
     
+    /**
+     * Método auxiliar del método leerEventosFichero para desglosar la linea leida en sus respectivas variables
+     * @param campos Linea leida del fichero, ya separada por el metodo split de la clase String
+     * @see Principal.leerEventosFichero()
+     */
     private void saberCampos(String campos[])
     {
         try
@@ -487,6 +504,14 @@ public class Principal implements Constantes_Colores
         }
     }//separarCampos()
     
+    /**
+     * Método para añadir un recordatorio a partir de un fichero
+     * @param diaentero Booleano para saber si el recordatorio está destinado para todo el dia
+     * @param fecha Variable de la clase LocalDate para guardar la fecha del recordatorio
+     * @param anual Booleano para saber si el recordatorio debe ser avisado cada año
+     * @param concepto Cadena que especifica lo que debe hacer el usuario en esa fecha.
+     * @param hora Variable de la clase LocalTime para saber a que hora corresponde el recordatorio
+     */
     private void annadirRecordatorio(boolean diaentero,LocalDate fecha,boolean anual,String concepto,LocalTime hora)
     {
         if(diaentero)
@@ -508,26 +533,40 @@ public class Principal implements Constantes_Colores
             
     }//annadirRecordatorio()
     
+    /**
+     * Método para añadir unam Tarea a partir de un fichero
+     * @param diaentero Booleano para saber si la Tarea está destinado para todo el dia
+     * @param fecha Variable de la clase LocalDate para guardar la fecha de la Tarea
+     * @param urgente Booleano para saber si la Tarea es urgente
+     * @param concepto Cadena que especifica lo que debe hacer el usuario en esa fecha.
+     * @param hora Variable de la clase LocalTime para saber a que hora corresponde la Tarea
+     * @param duracion Variable de la clase LocalTime para saber cuanto debe durar la Tarea
+     */
     private void annadirTarea(boolean diaentero,LocalDate fecha,boolean urgente,String concepto,LocalTime hora,LocalTime duracion)
     {
         if(diaentero)
             if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, false, concepto, diaentero, urgente, hora);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, false, concepto, diaentero, urgente, duracion);
             else
             {
                 dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, false, concepto, diaentero, urgente, hora);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(null, false, concepto, diaentero, urgente, duracion);
             }
         else
             if(dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] != null)
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, false, concepto, diaentero, urgente, hora);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, false, concepto, diaentero, urgente, duracion);
             else
             {
                 dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1] = new Dia(fecha);
-                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, false, concepto, diaentero, urgente, hora);
+                dias[fecha.getMonthValue()-1][fecha.getDayOfMonth()-1].crearEventosFichero(hora, false, concepto, diaentero, urgente, duracion);
             }
     }//annadirTarea()
     
+    /**
+     * Método auxiliar de separarCampos para saber el mes
+     * @param mes Cadena del mes separada por el método split
+     * @return Enumerado de la clase Month para saber el mes correspondiente
+     */
     private Month saberMes(String mes)
     {
         Month enumMes = null;
@@ -549,6 +588,9 @@ public class Principal implements Constantes_Colores
         return enumMes;
     }//saberMes()
     
+    /**
+     * Método llamado desde la clase Menu para guardar los eventos de toda la Agenda en un fichero
+     */
     public void guardarEventosAnno()
     {
         for (int i = 0; i < MESES; i++)
@@ -558,6 +600,9 @@ public class Principal implements Constantes_Colores
         ficheroNoGuardado = true;
     }//guardarEventosAnno()
     
+    /**
+     * Método llamado desde la clase Menu para guardar los eventos de un mes en un fichero
+     */
     public void guardarEventosMes() //OPCIONALES
     {
         int mes;
@@ -570,6 +615,9 @@ public class Principal implements Constantes_Colores
         ficheroNoGuardado = true;
     }//guardarEventosMes()
     
+    /**
+     * Método llamado desde la clase Menu para guardar los eventos de un día en un fichero
+     */
     public void guardarEventosDia() //OPCIONALES
     {
         int mes,dia;
@@ -599,7 +647,7 @@ public class Principal implements Constantes_Colores
     }//imprimirMesCalendario()
     
     /**
-     * Método invocado desde la clase Menu para leer desde un fichero los contactos y guardarlo en un ArrayList
+     * Método llamado desde la clase Menu para leer desde un fichero los contactos y guardarlo en un ArrayList
      */
     public void leerFicheroContactos()
     {
@@ -637,11 +685,15 @@ public class Principal implements Constantes_Colores
                     System.out.println(e.getMessage());                                                               
                 }
             }
+            contactoNoGuardado = false;
         }
         else
             System.out.println("Debe guardar los contactos para poder cargar de nuevo el fichero de contactos");
     }//leerFicheroContactos()
     
+    /**
+     * Método llamado desde la clase Meni para guardar los contactos en un fichero
+     */
     public void guardarContactos()
     {
         String cadena;
@@ -670,14 +722,21 @@ public class Principal implements Constantes_Colores
             }
         }
         System.out.println("Se han guardado todos los contactos en el fichero llamado 'guardar-contactos.dat'");
+        contactoNoGuardado = true;
     }//guardarContactos()
     
+    /**
+     * Método llamado desde la clase Menu para imprimir por pantalla a todos los contactos que hayan
+     */
     public void listarContactos()
     {
         for (Contacto contacto : contactos)
             System.out.println(contacto.getApellido() + "|" + contacto.getNombre() + "|" + contacto.getCorreo());
     }//listarContactos()
     
+    /**
+     * Método llamado desde la clase Menu para crear un nuevo contacto
+     */
     public void crearContacto()
     {
         entrada.nextLine();
@@ -701,6 +760,9 @@ public class Principal implements Constantes_Colores
             contactos.add(new Contacto(nombre, apellidos, correo));
     }//crearContacto()
     
+    /**
+     * Método llamado desde la clase Menu para encontrar a un contacto por su correo electronico
+     */
     public void buscarContacto()
     {
         entrada.nextLine();

@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Clase que se encarga del menu
+ * Clase que se encarga de las opciones correspondientes a la Agenda
  * @author Asier Sergio
  * @version 1.0
  */
@@ -15,6 +15,12 @@ public class Menu
 {
     private Scanner entrada = new Scanner(System.in);
     
+    /**
+     * Método llamado desde la clase Principal para que el usuario elija entre diferentes opciones
+     * @param p Objeto de la clase Principal
+     * @throws AWTException Excepciones para poder limpiar la pantalla
+     * @throws InterruptedException Excepciones para poder limpiar la pantalla 
+     */
     public void opcionesPrincipales(Principal p) throws AWTException, InterruptedException
     {
         int opcionPrincipal;
@@ -27,14 +33,19 @@ public class Menu
             System.out.println("\t4.- Salir");
             opcionPrincipal = comprobarScanner(4);
             switch (opcionPrincipal) {
-                case 1:opcionesEventosTareas(p);continuar();break;
-                case 2:opcionesContactos(p);continuar();break;
-                case 3:opcionesImprimirDias(p);continuar();break;
+                case 1 -> {opcionesEventosTareas(p);continuar();}
+                case 2 -> {opcionesContactos(p);continuar();}
+                case 3 -> {opcionesImprimirDias(p);continuar();}
             }
         }while (opcionPrincipal != 4);
         System.out.println("|PROGRAMA TERMINADO|");
     }//opciones()
     
+    /**
+     * Método para comprobar que el usuario introduzca solamente numeros enteros
+     * @param opMax Numero entero que regula la opcion máxima que puede elegir el usuario
+     * @return Numero entero introducido por el usuario
+     */
     private int comprobarScanner(int opMax)
     {
         int opcion = -1;
@@ -55,6 +66,9 @@ public class Menu
         return opcion;
     }//comprobarScanner()
     
+    /**
+     * Método para que al finalizar la opción de un submenu el usuario pulse una tecla para continuar
+     */
     private void continuar()
     {
         String enter;
@@ -63,6 +77,11 @@ public class Menu
         enter = entrada.nextLine();
     }//continuar()
     
+    /**
+     * Método encargado de limpiar la pantalla
+     * @throws AWTException Excepciones para poder limpiar la pantalla
+     * @throws InterruptedException Excepciones para poder limpiar la pantalla 
+     */
     public void limpiar() throws AWTException, InterruptedException
     {
         Robot limpiar = new Robot();
@@ -73,6 +92,12 @@ public class Menu
         Thread.sleep(250);
     }//limpiar()
     
+    /**
+     * Método encargado de ser un submenu de las opciones referidas a Eventos
+     * @param p Objeto de la clase Principal
+     * @throws AWTException Excepciones para poder limpiar la pantalla
+     * @throws InterruptedException Excepciones para poder limpiar la pantalla 
+     */
     private void opcionesEventosTareas(Principal p) throws AWTException, InterruptedException
     {
         int op;
@@ -94,28 +119,40 @@ public class Menu
         limpiar();
         switch (op) 
         {
-            case 1: p.crearEventos(1); break;
-            case 2: p.crearEventos(2);break;
-            case 3: p.borrarRecordatorio(); break;
-            case 4: p.borrarTarea(); break;
-            case 5: p.imprimirEventosDia(); break;
-            case 6: p.imprimirEventosMes(); break;
-            case 7: p.imprimirTodosLosEventos(); break;
-            case 8: p.imprimirEventoEspecifico(); break;
-            case 9: p.leerEventosFichero(); break;
-            case 10: p.guardarEventosAnno(); break;
-            case 11: p.guardarEventosMes(); break;
-            case 12: p.guardarEventosDia(); break;
+            case 1 -> p.crearEventos(1);
+            case 2 -> p.crearEventos(2);
+            case 3 -> p.borrarRecordatorio();
+            case 4 -> p.borrarTarea();
+            case 5 -> p.imprimirEventosDia();
+            case 6 -> p.imprimirEventosMes();
+            case 7 -> p.imprimirTodosLosEventos();
+            case 8 -> p.imprimirEventoEspecifico();
+            case 9 -> p.leerEventosFichero();
+            case 10 -> p.guardarEventosAnno();
+            case 11 -> p.guardarEventosMes();
+            case 12 -> p.guardarEventosDia();
         }
         
     }//opcionesEventosTareas()
     
+    /**
+     * Método que se encarga de llamar a un método de la clase Principal para poder imprimir un mes en forma de calendario
+     * @param p Objeto de la clase Principal
+     * @throws AWTException Excepciones para poder limpiar la pantalla
+     * @throws InterruptedException Excepciones para poder limpiar la pantalla 
+     */
     private void opcionesImprimirDias(Principal p) throws AWTException, InterruptedException
     {
         limpiar();
         p.imprimirMesCalendario();
     }//opcionesImprimirDias()
     
+    /**
+     * Método encargado de ser un submenu para las opciones referidas a los contactos
+     * @param p Objeto de la clase Principal
+    * @throws AWTException Excepciones para poder limpiar la pantalla
+     * @throws InterruptedException Excepciones para poder limpiar la pantalla 
+     */
     private void opcionesContactos(Principal p) throws AWTException, InterruptedException
     {
         int op;
@@ -130,11 +167,11 @@ public class Menu
         limpiar();
         switch (op) 
         {
-            case 1:p.leerFicheroContactos(); break;
-            case 2:p.crearContacto(); break;
-            case 3:p.listarContactos(); break;
-            case 4:p.buscarContacto(); break;
-            case 5:p.guardarContactos(); break;
+            case 1 -> p.leerFicheroContactos();
+            case 2 -> p.crearContacto();
+            case 3 -> p.listarContactos();
+            case 4 -> p.buscarContacto();
+            case 5 -> p.guardarContactos();
         }
     }//opcionesContactos()
 }//class
