@@ -251,12 +251,12 @@ public class Principal implements Constantes_Colores
             }while(!(urgente == 1 || urgente == 0));
 
             do{
-                horaEstimada = comprobarScanner("Introduce las horas que durara el Recordatorio [0..23] -> ");
+                horaEstimada = comprobarScanner("Introduce las horas que durara la Tarea [0..23] -> ");
             }while(!(horaEstimada >= 0 && horaEstimada <= 23));
             do{
-                minutosEstimados = comprobarScanner("Introduce los minutos que durara el Recordatorio [0 ò 30] -> ");
+                minutosEstimados = comprobarScanner("Introduce los minutos que durara la Tarea [0 ò 30] -> ");
             }while(!(minutosEstimados == 0 || minutosEstimados == 30));
-            System.out.println("Introduzca el concepto del recordatorio -> ");
+            System.out.println("Introduzca el concepto de la Tarea -> ");
             entrada.nextLine();
             concepto = entrada.nextLine();
             urg = urgente == 1;
@@ -699,7 +699,7 @@ public class Principal implements Constantes_Colores
         String cadena;
         try 
         {
-            fw = new FileWriter("./src/FICHEROS/guardar-contactos.dat");
+            fw = new FileWriter("./src/FICHEROS/contactos.dat");
             PrintWriter pw = new PrintWriter(fw);
             for (Contacto contacto : contactos) 
             {
