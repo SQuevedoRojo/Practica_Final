@@ -777,7 +777,7 @@ public class Principal implements Constantes_Colores
                 System.out.println("Contacto encontrado");
                 System.out.println(contacto.getApellido() + "|" + contacto.getNombre() + "|" + contacto.getCorreo());
             }
-        if(encontrado == false)
+        if(!encontrado)
             System.out.println("Contacto no encontrado");
     }//buscarContacto()
 }//class
