@@ -14,7 +14,13 @@ import java.time.LocalTime;
  * @version 1.0
  */
 public class Tarea extends Evento{
+    /**
+     * booleano el cual guarda si es urgente
+     */
     private boolean urgente;
+    /**
+     * variable la cual sirve para guardar un tiempo estimado de la tarea
+     */
     private LocalTime tiempoEstimado;
 
     public Tarea(boolean urgente, LocalTime tiempoEstimado, String nombre, boolean diaEntero, LocalDateTime fechaHora) {
@@ -53,6 +59,12 @@ public class Tarea extends Evento{
             System.out.println("TAREA NO URGENTE");
     }
     
+    /**
+     * Metodo el cual imprime por pantalla los datos del evento
+     * 
+     * @param fecha
+     * @param nombre 
+     */
     @Override
     public void imprimirInfo(LocalDate fecha,String nombre){
         FileWriter fw = null;
@@ -84,7 +96,11 @@ public class Tarea extends Evento{
             }
         }
     }
-    
+    /**
+     * Metodo que comprueba si la tarea es urgente y devuelve un String
+     * @param urg
+     * @return 
+     */
     public String comprobarUrgente(boolean urg)
     {
         String cade;

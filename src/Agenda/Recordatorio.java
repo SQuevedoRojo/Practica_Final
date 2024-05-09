@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 public class Recordatorio extends Evento{
+    /**
+     * booleano el cual sirve para guardar si es un recordatorio anual
+     */
     private boolean anual;
 
     public Recordatorio(boolean anual, String nombre, boolean diaEntero, LocalDateTime fechaHora) {
@@ -40,6 +43,12 @@ public class Recordatorio extends Evento{
             System.out.println("RECORDATORIO ANUAL");
     }
     
+    /**
+     * Metodo el cual imprime por pantalla los datos del evento
+     * 
+     * @param fecha
+     * @param nombre 
+     */
     @Override
     public void imprimirInfo(LocalDate fecha,String nombre){
         FileWriter fw = null;
@@ -71,7 +80,12 @@ public class Recordatorio extends Evento{
         }
         
     }
-    
+    /**
+     * Metodo que comprueba si un recordatorio es anual y devuelve un String
+     * 
+     * @param anu
+     * @return 
+     */
     public String comprobarAnual(boolean anu)
     {
         String cade;

@@ -6,8 +6,17 @@ package Agenda;
  * @version 1.0
  */
 public class Contacto {
+    /**
+     * variable que guarda el nombre del contacto
+     */
     private String nombre;
+    /**
+     * variable que guarda el apellido del contacto
+     */
     private String apellido;
+    /**
+     * variable que guarda el correo del contacto
+     */
     private String correo;
 
     public Contacto(String nombre, String apellido, String correo) {

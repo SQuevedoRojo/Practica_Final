@@ -8,12 +8,22 @@ import java.util.ArrayList;
 
 /**
  * Clase dia que se encarga de guardar las tareas de los eventos
+ * 
  * @author Asier Sergio
  * @version 1.0
  */
 public class Dia {
+    /**
+     * arraylist que guarda los eventos organizados por horas desde las 00:00 hasta las 23:30
+     */
     private ArrayList<Evento>[] horas;
+    /**
+     * arraylist de eventos de dia entero
+     */
     private ArrayList<Evento> eventosDiaEntero;
+    /**
+     * Fecha del dia correspondiente la cual guarda año mes y dia
+     */
     private LocalDate fecha;
 
     public Dia(LocalDate fecha) {
@@ -55,7 +65,14 @@ public class Dia {
         }
     }
     
-    
+    /**
+     * Metodo que crea un elemento en el array list correspondiente sacandolo de un fichero
+     * 
+     * @param hora
+     * @param an
+     * @param nombre
+     * @param diaEnt 
+     */
     public void crearEventosFichero(LocalTime hora,boolean an,String nombre,boolean diaEnt,boolean urg,LocalTime tiempo){
         
         boolean encontrado = false;
@@ -207,6 +224,11 @@ public class Dia {
                 }
     }
     
+    /**
+     * Metodo el cual imprime en pantalla los eventos
+     * 
+     * @param nombre 
+     */
     public void imprimirEventos(String nombre)
     {
         for (ArrayList<Evento> hora : horas) {
@@ -220,5 +242,4 @@ public class Dia {
             e.imprimirInfo(fecha,nombre);
         }
     }
-    
 }

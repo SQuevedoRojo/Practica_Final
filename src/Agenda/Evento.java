@@ -9,10 +9,25 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 public abstract class Evento {
+    /**
+     * variable la cual sirve como identificador del evento
+     */
     private int id;
+    /**
+     * variable estatica la cual sirve para el control del identificador de los eventos
+     */
     private static int sigId=1;
+    /**
+     * Nombre del evento
+     */
     private String nombre;
+    /**
+     * booleano el cual dice si es de un dia entero o si se hace a una hora especifica
+     */
     private boolean diaEntero;
+    /**
+     * guarda un valor de tipo fecha el cual guarda la hora y minuto
+     */
     private LocalDateTime fechaHora;
 
     public Evento(String nombre, boolean diaEntero, LocalDateTime fechaHora) {
@@ -48,6 +63,7 @@ public abstract class Evento {
     }
     /**
      * Metodo que imprime la informacion del evento
+     * 
      */
     public void mostrarInformacion()
     {
@@ -65,5 +81,12 @@ public abstract class Evento {
         }
         System.out.println("EL CONCEPTO ES : \n\t" + nombre);
     }
+    
+    /**
+     * Metodo el cual imprime por pantalla los datos del evento
+     * 
+     * @param fecha
+     * @param nombre 
+     */
     public abstract void imprimirInfo(LocalDate fecha,String nombre);
 }
