@@ -2,9 +2,19 @@ package Agenda;
 
 import java.util.GregorianCalendar;
 
-
+/**
+ * Clase Calendario la cual muestra por pantalla un calendario de un mes y año especificos
+ * @author Asier Sergio
+ * @version 1.0
+ */
 public class Calendario implements Constantes_Colores
 {
+    /**
+     * Metodo el cual imprime un calendario de un mes y año especificos
+     * 
+     * @param mes
+     * @param anno 
+     */
     public static void calendarioPorMes(int mes, int anno) 
     {
         int primerDia = 1;
@@ -49,6 +59,12 @@ public class Calendario implements Constantes_Colores
         System.out.println("");
     }//calendarioPorMes()
     
+    /**
+     * Metodo empleado para saber la posicion de un dia en el calendario
+     * 
+     * @param dia
+     * @param fecha 
+     */
     private static void saberDia(int dia,GregorianCalendar fecha)
     {
         if(dia < 10)

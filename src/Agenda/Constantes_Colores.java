@@ -1,5 +1,10 @@
 package Agenda;
-
+/**
+ * Clase La cual guarda los codigos de cada color
+ * 
+ * @author Asier Sergio
+ * @version 1.0
+ */
 public interface Constantes_Colores 
 {
     String ANSI_BLACK = "\u001B[30m";
