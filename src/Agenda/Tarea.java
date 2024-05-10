@@ -65,9 +65,9 @@ public class Tarea extends Evento{
      * Metodo que imprime la informacion del evento
      */
     @Override
-    public void mostrarInformacion()
+    public void mostrarInformacion(LocalDate fecha)
     {
-        super.mostrarInformacion();
+        super.mostrarInformacion(fecha);
         if(urgente)
         {
             System.out.println("TAREA URGENTE");

@@ -49,9 +49,9 @@ public class Recordatorio extends Evento{
      * Metodo que imprime la informacion del evento
      */
     @Override
-    public void mostrarInformacion()
+    public void mostrarInformacion(LocalDate fecha)
     {
-        super.mostrarInformacion();
+        super.mostrarInformacion(fecha);
         if(anual)
             System.out.println("RECORDATORIO ANUAL");
     }

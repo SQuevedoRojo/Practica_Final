@@ -603,7 +603,7 @@ public class Principal implements Constantes_Colores
         for (int i = 0; i < MESES; i++)
             for (int j = 0; j < diasUtilizados[i]; j++)
                 if(dias[i][j] != null)
-                    dias[i][j].imprimirEventos("AÑO");
+                    dias[i][j].imprimirEventos("ANO");
         ficheroNoGuardado = true;
     }//guardarEventosAnno()
     

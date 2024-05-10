@@ -208,11 +208,11 @@ public class Dia {
         for (int i = 0; i < horas.length; i++) {
             if (horas[i]!=null)
                 for (int j = 0; j < horas[i].size(); j++) {
-                    horas[i].get(j).mostrarInformacion();
+                    horas[i].get(j).mostrarInformacion(fecha);
                 }
         }
         for (int i = 0; i < eventosDiaEntero.size(); i++) {
-                eventosDiaEntero.get(i).mostrarInformacion();
+                eventosDiaEntero.get(i).mostrarInformacion(fecha);
         }
     }
     
@@ -225,7 +225,7 @@ public class Dia {
         int posicion=calculoPosicion(pos);
             if (horas[posicion]!=null)
                 for (int j = 0; j < horas[posicion].size(); j++) {
-                    horas[posicion].get(j).mostrarInformacion();
+                    horas[posicion].get(j).mostrarInformacion(fecha);
                 }
     }
     

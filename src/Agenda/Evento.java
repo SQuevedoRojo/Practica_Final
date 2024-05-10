@@ -84,14 +84,16 @@ public abstract class Evento {
     /**
      * Metodo que imprime la informacion del evento
      * 
+     * 
+     * @param fecha Fecha del Evento si se trata de dia entero
      */
-    public void mostrarInformacion()
+    public void mostrarInformacion(LocalDate fecha)
     {
         
         if(diaEntero)
         {
             System.out.println("ID -> " + id);
-            System.out.println("ESTA DESTINADO PARA EL DIA ENTERO");
+            System.out.println("ESTA DESTINADO PARA EL DIA ENTERO " + fecha);
         }
         else
         {
