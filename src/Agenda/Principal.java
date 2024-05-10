@@ -254,7 +254,7 @@ public class Principal implements Constantes_Colores
                 minutos = comprobarScanner("Introduce los minutos para crear la Tarea [0 ò 30] -> ");
             }while(!(minutos == 0 || minutos == 30));
             do{
-                urgente = comprobarScanner("Introduce 1 si el Recordatorio urgente, sino introduzca 0 -> ");
+                urgente = comprobarScanner("Introduce 1 si la Tarea urgente, sino introduzca 0 -> ");
             }while(!(urgente == 1 || urgente == 0));
 
             do{
