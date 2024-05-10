@@ -29,7 +29,12 @@ public abstract class Evento {
      * guarda un valor de tipo fecha el cual guarda la hora y minuto
      */
     private LocalDateTime fechaHora;
-
+    /**
+     * Constructor de evento si es para una hora especifica
+     * @param nombre Nombre del evento
+     * @param diaEntero booleano el cual dice si es de un dia entero o si se hace a una hora especifica
+     * @param fechaHora guarda un valor de tipo fecha el cual guarda la hora y minuto
+     */
     public Evento(String nombre, boolean diaEntero, LocalDateTime fechaHora) {
         this.nombre = nombre;
         this.diaEntero = diaEntero;
@@ -37,27 +42,42 @@ public abstract class Evento {
         this.id=sigId;
         this.sigId++;
     }
-
+    /**
+     * Constructor de evento si es para un dia entero
+     * @param nombre Nombre del evento
+     * @param diaEntero booleano el cual dice si es de un dia entero o si se hace a una hora especifica
+     */
     public Evento(String nombre, boolean diaEntero) {
         this.nombre = nombre;
         this.diaEntero = diaEntero;
         this.id=sigId;
         this.sigId++;
     }
-    
-
+    /**
+     * Getter de nombre
+     * @return devuelve el atributo nombre
+     */
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     * Getter de diaEntero
+     * @return devuelve el atributo diaEntero
+     */
     public boolean isDiaEntero() {
         return diaEntero;
     }
-
+    /**
+     * Getter de fechaHora
+     * @return devuelve el atributo fechaHora
+     */
     public LocalDateTime getFechaHora() {
         return fechaHora;
     }
-
+    /**
+     * Getter de id
+     * @return devuelve el atributo id
+     */
     public int getId() {
         return id;
     }
@@ -85,8 +105,8 @@ public abstract class Evento {
     /**
      * Metodo el cual imprime por pantalla los datos del evento
      * 
-     * @param fecha
-     * @param nombre 
+     * @param fecha  dia del cual se imprime el evento
+     * @param nombre nombre del evento a imprimir
      */
     public abstract void imprimirInfo(LocalDate fecha,String nombre);
 }

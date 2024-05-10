@@ -25,7 +25,10 @@ public class Dia {
      * Fecha del dia correspondiente la cual guarda año mes y dia
      */
     private LocalDate fecha;
-
+    /**
+     * Constructor de dia
+     * @param fecha Fecha del dia correspondiente la cual guarda año mes y dia
+     */
     public Dia(LocalDate fecha) {
         this.fecha = fecha;
         horas = new ArrayList[48];
@@ -43,10 +46,10 @@ public class Dia {
     /**
      * Metodo que crea un elemento recordatorio en el array list correspondiente
      * 
-     * @param hora
-     * @param an
-     * @param nombre
-     * @param diaEnt 
+     * @param hora atributo que refleja la hora del evento
+     * @param an booleano para controlar si es un evento anual
+     * @param nombre nombre del evento
+     * @param diaEnt booleano para controlar si en de dia entero
      */
     public void crearRecordatorio(LocalTime hora,boolean an,String nombre,boolean diaEnt){
         
@@ -68,10 +71,12 @@ public class Dia {
     /**
      * Metodo que crea un elemento en el array list correspondiente sacandolo de un fichero
      * 
-     * @param hora
-     * @param an
-     * @param nombre
-     * @param diaEnt 
+     * @param hora atributo que refleja la hora del evento
+     * @param an booleano para controlar si es un evento anual
+     * @param nombre nombre del evento
+     * @param diaEnt booleano para controlar si en de dia entero
+     * @param urg booleano para controlar si es una tarea urgente
+     * @param tiempo tiempo que dura una tarea
      */
     public void crearEventosFichero(LocalTime hora,boolean an,String nombre,boolean diaEnt,boolean urg,LocalTime tiempo){
         
@@ -104,11 +109,11 @@ public class Dia {
     /**
      * Metodo que crea un elemento tarea en el array list correspondiente
      * 
-     * @param hora
-     * @param urg
-     * @param nombre
-     * @param diaEnt
-     * @param tiempo 
+     * @param hora atributo que refleja la hora del evento
+     * @param nombre nombre del evento
+     * @param diaEnt booleano para controlar si en de dia entero
+     * @param urg booleano para controlar si es una tarea urgente
+     * @param tiempo tiempo que dura una tarea
      */
     public void crearTarea(LocalTime hora,boolean urg,String nombre,boolean diaEnt,LocalTime tiempo){
         
@@ -130,8 +135,8 @@ public class Dia {
     /**
      * Metodo que calcula la posicion en el array list de horas para la creacion de eventos
      * 
-     * @param h
-     * @return 
+     * @param h hora del evento
+     * @return devuelve un entero 
      */
     public int calculoPosicion(LocalTime h){
         int res;
@@ -143,8 +148,8 @@ public class Dia {
     /**
      * Metodo el cual elimina un elemeno recordatorio del array list
      * 
-     * @param id
-     * @return 
+     * @param id identificador del evento
+     * @return devuelve un booleano
      */
     public boolean eliminarRecordatorio(int id){
         boolean ok=false;
@@ -171,8 +176,8 @@ public class Dia {
     /**
      * Metodo el cual elimina un elemeno tarea del array list 
      * 
-     * @param id
-     * @return 
+     * @param id identificador del evento
+     * @return devuelve un booleano 
      */
     public boolean eliminarTarea(int id){
         boolean ok=false;
@@ -214,7 +219,7 @@ public class Dia {
     /**
      * Metodo el cual muestra la informacion de una hora especifica
      * 
-     * @param pos 
+     * @param pos hora del evento a imprimir
      */
     public void tratarInfoEspecifico(LocalTime pos){
         int posicion=calculoPosicion(pos);
@@ -225,9 +230,9 @@ public class Dia {
     }
     
     /**
-     * Metodo el cual imprime en pantalla los eventos
+     * Metodo el cual imprime en el fichero los eventos
      * 
-     * @param nombre 
+     * @param nombre nombre que indica si el fichero es de todo un año, un mes o un dia
      */
     public void imprimirEventos(String nombre)
     {

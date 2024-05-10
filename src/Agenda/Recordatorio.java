@@ -17,18 +17,31 @@ public class Recordatorio extends Evento{
      * booleano el cual sirve para guardar si es un recordatorio anual
      */
     private boolean anual;
-
+    /**
+     * Canstructor de recordatorio
+     * @param anual booleano para controlar si es un recordatorio anual
+     * @param nombre nombre del recordatorio
+     * @param diaEntero booleano que indica si el recordatorio ocupa el dia entero
+     * @param fechaHora guarda un valor de tipo fecha el cual guarda la hora y minuto
+     */
     public Recordatorio(boolean anual, String nombre, boolean diaEntero, LocalDateTime fechaHora) {
         super(nombre, diaEntero, fechaHora);
         this.anual = anual;
     }
-
+    /**
+     * Canstructor de recordatorio
+     * @param anual booleano para controlar si es un recordatorio anual
+     * @param nombre nombre del recordatorio
+     * @param diaEntero booleano que indica si el recordatorio ocupa el dia entero
+     */
     public Recordatorio(boolean anual, String nombre, boolean diaEntero) {
         super(nombre, diaEntero);
         this.anual = anual;
     }
-    
-
+    /**
+     * getter de anual
+     * @return debuelve el atributo anual
+     */
     public boolean isAnual() {
         return anual;
     }
@@ -46,8 +59,8 @@ public class Recordatorio extends Evento{
     /**
      * Metodo el cual imprime por pantalla los datos del evento
      * 
-     * @param fecha
-     * @param nombre 
+     * @param fecha  dia del cual se imprime el evento
+     * @param nombre nombre del evento a imprimir
      */
     @Override
     public void imprimirInfo(LocalDate fecha,String nombre){
@@ -83,8 +96,8 @@ public class Recordatorio extends Evento{
     /**
      * Metodo que comprueba si un recordatorio es anual y devuelve un String
      * 
-     * @param anu
-     * @return 
+     * @param anu booleano que indica si es anual
+     * @return devuelve un String
      */
     public String comprobarAnual(boolean anu)
     {

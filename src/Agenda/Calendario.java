@@ -12,8 +12,8 @@ public class Calendario implements Constantes_Colores
     /**
      * Metodo el cual imprime un calendario de un mes y año especificos
      * 
-     * @param mes
-     * @param anno 
+     * @param mes variable introducida por el usuario la cual representa el mes a imprimir
+     * @param anno variable introducida por el usuario la cual representa el año a imprimir
      */
     public static void calendarioPorMes(int mes, int anno) 
     {
@@ -60,10 +60,10 @@ public class Calendario implements Constantes_Colores
     }//calendarioPorMes()
     
     /**
-     * Metodo empleado para saber la posicion de un dia en el calendario
+     * Metodo empleado para imprimirlo de un color diferente 
      * 
-     * @param dia
-     * @param fecha 
+     * @param dia variable la calual guarada el dia para saber su posicion en la semana
+     * @param fecha variable la cual sir
      */
     private static void saberDia(int dia,GregorianCalendar fecha)
     {

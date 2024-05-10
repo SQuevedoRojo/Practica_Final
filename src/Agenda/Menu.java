@@ -13,6 +13,9 @@ import java.util.Scanner;
  */
 public class Menu 
 {
+    /**
+     * atributo scanner
+     */
     private Scanner entrada = new Scanner(System.in);
     
     /**

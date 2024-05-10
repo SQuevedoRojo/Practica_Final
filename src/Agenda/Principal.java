@@ -70,14 +70,21 @@ public class Principal implements Constantes_Colores
      * Atributo booleano para que al cargar de un fichero los Contactos, deba guardar los Contactos en un fichero para poder cargar de nuevo
      */
     private boolean contactoNoGuardado = true;
-    
+    /**
+     * constructor del objeto principal
+     */
     public Principal()
     {
         dias = new Dia[MESES][DIAS];
         menu = new Menu();
         contactos = new ArrayList<Contacto>();
     }
-    
+    /**
+     * Encargado de iniciar el programa principal
+     * @param args argumentos y se inicia en la terminal
+     * @throws AWTException excepciones para limpiar pantalla
+     * @throws InterruptedException excepciones para limpiar pantalla
+     */
     public static void main(String[] args) throws AWTException, InterruptedException 
     {
         Principal p = new Principal();
@@ -439,7 +446,7 @@ public class Principal implements Constantes_Colores
     /**
      * Método auxiliar del método leerEventosFichero para desglosar la linea leida en sus respectivas variables
      * @param campos Linea leida del fichero, ya separada por el metodo split de la clase String
-     * @see Principal.leerEventosFichero()
+     * @see leerEventosFichero()
      */
     private void saberCampos(String campos[])
     {
